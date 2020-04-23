@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>The best ASRT experiment</title>
+        <script src="jspsych-6.1.0/jspsych.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-image-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-serial-reaction-time.js"></script>
+        <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body></body>
+    <script>
+
+        /*create timeline*/
+
+        var timeline = [];
+
+        /*define welcome message trial*/
+        
+        var welcome = {
+            type: "html-keyboard-response",
+            stimulus: "<h2>Welcome to the best online ASRT experiment ever.</h2>" +
+            "</p> Press any key to begin.</p>" +
+            "<div class='float: center;'><img src='img/memo_logo.jpg' height='100' width='120'></img></div>"
+        };
+
+        timeline.push(welcome);
+
+        /*define instructions*/
+
+        var instructions = {
+            type: "html-keyboard-response",
+            stimulus: "<p>In this experiment, you will see four squares on the screen. Your task will be to press the button corresponding to the position of the <strong>blue square</strong>.</p>" +
+            "<p>If the blue square is in the first position, press the <strong>'S'</strong> button!</p>" + 
+            "<p>If the blue square is in the second position, press the <strong>'D'</strong> button!</p>" +
+            "<p>If the blue square is in the third position, press the <strong>'J'</strong> button!</p>" +
+            "<p>If the blue square is in the fourth position, press the <strong>'K'</strong> button!</p>" +
+            "<p><strong>Try to be as fast and as accurate as possible!</strong></p>" +
+            "<p>If you are ready, press ANY key to start the task!</p>"
+        };
+
+        timeline.push(instructions); 
+
+        /*add subject and condition properties*/
+
+        jsPsych.data.addProperties({subject: 1, condition: 'control'});
+
+        /*define stimuli*/
+
+        var sequences = [[0,1,2,3],[0,2,1,3]]; //4 positions (0 for first etc.)
+        var usedSequence = sequences[Math.floor(Math.random() * sequences.length)];
+        var responseKeys = [['s','d','j','k']];
+
+        /*define the four pattern stimuli*/
+
+        var patternStimulus1 = [
+            { stimulus: [0,usedSequence[0]], data: {tripletType: "P"}}
+        ]
+        var patternStimulus2 = [
+            { stimulus: [0,usedSequence[1]], data: {tripletType: "P"}}
+        ]
+        var patternStimulus3 = [
+            { stimulus: [0,usedSequence[2]], data: {tripletType: "P"}}
+        ]
+        var patternStimulus4 = [
+            { stimulus: [0,usedSequence[3]], data: {tripletType: "P"}}
+        ]
+
+        /*function for random stimulus generation*/
+
+        function randomStimulusProcedureGenerator(){
+            newRandom = Math.floor(Math.random() * 4);
+            var randomStimulus = [{ stimulus: [0,newRandom], data: {tripletType: "R"}}]
+            var randomProc = {
+                timeline: [random],
+                timeline_variables: randomStimulus
+            }
+            return randomProc
+        };
+
+        /*define trials*/
+
+         var pattern1 = {
+            type: "serial-reaction-time",
+            grid: [[1,1,1,1]],
+            choices: [['s','d','j','k']],
+            target: jsPsych.timelineVariable('stimulus'),
+            pre_target_duration: 120,
+            target_color: "#23CFC9",
+            data: jsPsych.timelineVariable('data'),
+            response_ends_trial: true,
+        };
+
+        var pattern2 = pattern1;
+        var pattern3 = pattern1;
+        var pattern4 = pattern1;
+        var random = pattern1;
+
+        /*define incorrect trials*/
+
+        var pattern1If = {
+            type: "serial-reaction-time",
+            grid: [[1,1,1,1]],
+            choices: [['s','d','j','k']],
+            target: jsPsych.timelineVariable('stimulus'),
+            target_color: "#23CFC9",
+            data: jsPsych.timelineVariable('data'),
+            response_ends_trial: true
+        };
+
+        var pattern2If = pattern1If
+        var pattern3If = pattern1If
+        var pattern4If = pattern1If
+        var randomIf = pattern1If
+
+        /*define trial procedures*/
+        
+         var pattern1Proc = {
+            timeline: [pattern1],
+            timeline_variables: patternStimulus1
+        }
+
+        var pattern2Proc = {
+            timeline: [pattern2],
+            timeline_variables: patternStimulus2
+        }
+        var pattern3Proc = {
+            timeline: [pattern3],
+            timeline_variables: patternStimulus3
+        }
+        var pattern4Proc = {
+            timeline: [pattern4],
+            timeline_variables: patternStimulus4
+        }
+
+        var actualRandom = randomStimulusProcedureGenerator();
+
+        /*define incorrect trial procedures*/
+
+        var pattern1ProcIf = {
+            timeline: [pattern1If],
+            timeline_variables: patternStimulus1,
+            conditional_function: function(){
+                var data = jsPsych.data.get().last(1).values()[0];
+                if(data.correct == true){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        var pattern2ProcIf = {
+            timeline: [pattern2If],
+            timeline_variables: patternStimulus2,
+            conditional_function: function(){
+                var data = jsPsych.data.get().last(1).values()[0];
+                if(data.correct == true){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        var pattern3ProcIf = {
+            timeline: [pattern3If],
+            timeline_variables: patternStimulus3,
+            conditional_function: function(){
+                var data = jsPsych.data.get().last(1).values()[0];
+                if(data.correct == true){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        var pattern4ProcIf = {
+            timeline: [pattern4If],
+            timeline_variables: patternStimulus4,
+            conditional_function: function(){
+                var data = jsPsych.data.get().last(1).values()[0];
+                if(data.correct == true){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+
+        /*define feedbacks*/
+
+            var feedback = {
+            type: "html-keyboard-response",
+            stimulus: function() {
+                var trials = jsPsych.data.get();
+                var correct_trials = trials.filter({correct: true});
+                var numberOfTrials = trials.count()-2
+                var accuracy = Math.round(correct_trials.count() / numberOfTrials * 100);
+                var rt = Math.round(correct_trials.select('rt').mean());
+
+                return "<h2>Your accuracy: "+accuracy+"%</h2>"+
+                "<h2>Your average response time: "+rt+" ms</h2>"+
+                "<h2>Press any key to continue!</h2>";
+            }
+        };
+
+        /*function for inserting conditional after incorrect response*/
+
+        function insertConditionalAfterIncorrectResponse(element){
+            for (i=0; i < 100; i++){
+                timeline.push(element);
+            }
+        }
+
+        /*function for inserting the same random element as originally after incorrect response*/
+
+        function randomIfInsert(){
+            var randomProcIf = {
+                timeline: [randomIf],
+                timeline_variables: actualRandom.timeline_variables,
+                conditional_function: function(){
+                    var data = jsPsych.data.get().last(1).values()[0];
+                    if(data.correct == true){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+            return randomProcIf
+        }
+
+        /*set up number of blocks*/
+
+        for (j=1; j < 3; j++){ //2 blocks
+
+            /*create all block elements*/
+
+            for(k=0; k < 2; k++){ //8-elements sequence 2 times
+                timeline.push(pattern1Proc);
+                insertConditionalAfterIncorrectResponse(pattern1ProcIf)
+                var actualRandom = randomStimulusProcedureGenerator();
+                timeline.push(actualRandom);
+                insertConditionalAfterIncorrectResponse(randomIfInsert());
+                
+                timeline.push(pattern2Proc);
+                insertConditionalAfterIncorrectResponse(pattern2ProcIf)
+                var actualRandom = randomStimulusProcedureGenerator();
+                timeline.push(actualRandom);
+                insertConditionalAfterIncorrectResponse(randomIfInsert());
+
+                timeline.push(pattern3Proc);
+                insertConditionalAfterIncorrectResponse(pattern3ProcIf)
+                var actualRandom = randomStimulusProcedureGenerator();
+                timeline.push(actualRandom);
+                insertConditionalAfterIncorrectResponse(randomIfInsert());
+
+                timeline.push(pattern4Proc);
+                insertConditionalAfterIncorrectResponse(pattern4ProcIf)
+                var actualRandom = randomStimulusProcedureGenerator();
+                timeline.push(actualRandom);
+                insertConditionalAfterIncorrectResponse(randomIfInsert());
+                }
+                timeline.push(feedback);
+            }
+
+        /*start the experiment*/
+
+        jsPsych.init({
+            timeline: timeline,
+            on_finish: function() {
+                jsPsych.data.displayData();
+                var interactionData = jsPsych.data.getInteractionData();
+                console.log(interactionData.json()); //prints out the interacton events
+                console.log(jsPsych.data.get().csv()); //prints out experiment output
+                jsPsych.data.get().localSave('csv','output.csv'); //saves experiment output to .csv file
+            }
+        })
+        </script>
+</html>

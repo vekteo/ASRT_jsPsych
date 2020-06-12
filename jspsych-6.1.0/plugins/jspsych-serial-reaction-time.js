@@ -46,7 +46,7 @@ jsPsych.plugins["serial-reaction-time"] = (function() {
       target_color: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Target color',
-        default: "#999",
+        default: "url(img/cat.jpg)",
         description: 'The color of the target square.'
       },
       response_ends_trial: {
@@ -130,10 +130,12 @@ jsPsych.plugins["serial-reaction-time"] = (function() {
 
 		function showTarget(){
       if(trial.fade_duration == null){
-        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.backgroundColor = trial.target_color;
+        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.background = trial.target_color;
+        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.backgroundSize = "contain";
       } else {
-        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.transition = "background-color "+trial.fade_duration;
-        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.backgroundColor = trial.target_color;
+        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.transition = "background-image "+trial.fade_duration;
+        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.background = trial.target_color;
+        display_element.querySelector('#jspsych-serial-reaction-time-stimulus-cell-'+trial.target[0]+'-'+trial.target[1]).style.backgroundSize = "contain";
       }
 
 			keyboardListener = jsPsych.pluginAPI.getKeyboardResponse({
@@ -223,12 +225,12 @@ jsPsych.plugins["serial-reaction-time"] = (function() {
       stimulus += "<div class='jspsych-serial-reaction-time-stimulus-row' style='display:table-row;'>";
       for(var j=0; j<grid[i].length; j++){
         stimulus += "<div class='jspsych-serial-reaction-time-stimulus-cell' id='jspsych-serial-reaction-time-stimulus-cell-"+i+"-"+j+"' "+
-         "style='width:"+square_size+"px; height:"+square_size+"px; display:table-cell; vertical-align:middle; text-align: center; font-size:"+square_size/2+"px;";
+         "style='width:"+square_size+"px; height:"+square_size+"px; border-radius: 100px; display:table-cell; vertical-align:middle; text-align: center; font-size:"+square_size/2+"px;";
         if(grid[i][j] == 1){
           stimulus += "border: 2px solid black;"
         }
         if(typeof target !== 'undefined' && target[0] == i && target[1] == j){
-          stimulus += "background-color: "+target_color+";"
+          stimulus += "background-image: "+target_color+";"
         }
         stimulus += "'>";
         if(typeof labels !=='undefined' && labels[i][j] !== false){

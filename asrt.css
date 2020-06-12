@@ -1,0 +1,16 @@
+p{
+    font-size: 1.5em;
+}
+
+.message{
+    color: red;
+}
+
+.continue{
+    padding-top: 100px;
+}
+
+.alert{
+    padding-top: 100px;
+    color: red;
+}

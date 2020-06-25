@@ -46,7 +46,7 @@ jsPsych.plugins["serial-reaction-time"] = (function() {
       target_color: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Target color',
-        default: "url(img/cat.jpg)",
+        default: "url(static/images/cat.jpg)",
         description: 'The color of the target square.'
       },
       response_ends_trial: {

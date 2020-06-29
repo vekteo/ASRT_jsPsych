@@ -145,7 +145,7 @@ jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 let patternTrialProperties = {type: "serial-reaction-time",
     grid: [[1,1,1,1]],
-    choices: [['s','d','j','k']],
+    choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120, //RSI in ms
     target_color: "url(static/images/cat.jpg)", //set image for pattern trials
@@ -155,7 +155,7 @@ let patternTrialProperties = {type: "serial-reaction-time",
 
 let patternIfTrialProperties = {type: "serial-reaction-time",
     grid: [[1,1,1,1]],
-    choices: [['s','d','j','k']],
+    choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0, //RSI set to 0 after incorrect response
     target_color: "url(static/images/cat.jpg)", //set image for pattern trials
@@ -173,7 +173,7 @@ for(p=1; p < 5; p++){ //create 4 pattern variables
 let randomTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1,1,1,1]],
-    choices: [['s','d','j','k']],
+    choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120,
     target_color: "url(static/images/cat2.jpg)", //set image for random trials
@@ -184,7 +184,7 @@ let randomTrialProperties = {
 let randomIfTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1,1,1,1]],
-    choices: [['s','d','j','k']],
+    choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0,
     target_color: "url(static/images/cat2.jpg)", //set image for random trials

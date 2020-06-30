@@ -177,13 +177,13 @@ let randomIf = randomIfTrialProperties
 
 /*set up blocks*/
 
+let actualRandom;
 /* practice blocks*/
-
-for (j=1; j < 3; j++){ //SET UP NUMBER OF PRACTICE BLOCKS HERE
-    for(l=1; l < 5; l++){
-        var actualRandom = randomStimulusProcedureGenerator();
+for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
+    for (let l = 1; l < 5; l++) {
+        actualRandom = randomStimulusProcedureGenerator(j);
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert());
+        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
     }
     timeline.push(feedback);
 }

@@ -5,7 +5,7 @@ const welcome = { //create welcome message trial
     type: "html-keyboard-response",
     stimulus: "<h1>Welcome to the experiment!</h1>" +
         "</p> Press any key to begin.</p>" +
-        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120'/></div>"
+        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>"
 };
 const instructions1 = { //define instruction trial 1
     type: "html-keyboard-response",

@@ -191,44 +191,33 @@ timeline.push(instructions3);
 
 /* set up pattern protocols */
 
-for (j=1; j < 3; j++){ //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
+for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
     let dataForPattern = {tripletType: "P", block: j, firstResponse: 1} //output parameters for pattern stimuli
 
-    for(m=1; m < 5; m++){
-        this["patternStimulus"+m] = [ { stimulus: [0,usedSequence[m-1]], data: dataForPattern}];
-        this["patternStimulus"+m+"If"] = [ { stimulus: [0,usedSequence[m-1]], data: dataForPattern}];
-    }
-
-    let patternList = [pattern1, pattern2, pattern3, pattern4]
-    let patternIfList = [pattern1If, pattern2If, pattern3If, pattern4If]
-    let patternStimulusList = [patternStimulus1, patternStimulus2, patternStimulus3, patternStimulus4]
-    let patternStimulusIfList = [patternStimulus1If, patternStimulus2If, patternStimulus3If, patternStimulus4If]
-
-    for(kk=1; kk < 5; kk++){
-        this["pattern"+kk+"Proc"] = new TrialProcs([patternList[kk-1]],patternStimulusList[kk-1])
-        this["pattern"+kk+"ProcIf"] = new IncorrectTrialProcs([patternIfList[kk-1]],patternStimulusIfList[kk-1])
-    }
-
-    let patternProcList = [pattern1Proc,pattern2Proc, pattern3Proc, pattern4Proc]
-    let patternIfProcList = [pattern1ProcIf,pattern2ProcIf,pattern3ProcIf,pattern4ProcIf]
-
     /* first five random stimuli at the beginning of the block*/
-
-    for(l=1; l < 6; l++){
-        var actualRandom = randomStimulusProcedureGenerator();
+    for (let l = 1; l < 6; l++) {
+        actualRandom = randomStimulusProcedureGenerator(j)
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert());
+        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
     }
 
     /*create all remaining block elements*/
-
-    for(k=0; k < 2; k++){ //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
-        for(n=0; n < 4; n++){ //repeat pattern + repeat random
-            var actualRandom = randomStimulusProcedureGenerator();
+    for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
+        for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
+            actualRandom = randomStimulusProcedureGenerator(j)
             timeline.push(actualRandom);
-            insertConditionalAfterIncorrectResponse(randomIfInsert());
-            timeline.push(patternProcList[n]);
-            insertConditionalAfterIncorrectResponse(patternIfProcList[n])
+            insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+            let patternTrialProc = {
+                timeline: [patternTrialProperties],
+                timeline_variables: [{stimulus: [0, usedSequence[n]], data: dataForPattern}]
+            }
+            timeline.push(patternTrialProc)
+            ;
+            let incorrectTrialProc = new IncorrectTrialProcs([patternIfTrialProperties], [{
+                stimulus: [0, usedSequence[n]],
+                data: dataForPattern
+            }]);
+            insertConditionalAfterIncorrectResponse(incorrectTrialProc)
         }
     }
 

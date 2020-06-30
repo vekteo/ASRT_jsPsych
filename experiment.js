@@ -10,7 +10,7 @@ const welcome = { //create welcome message trial
 const instructions1 = { //define instruction trial 1
     type: "html-keyboard-response",
     stimulus: "<p>In this experiment, you will see four circles on the screen.</p>" +
-        "<p>An <b>image of a cat</b> will appear in one of the circles.</p>"+
+        "<p>An <b>image of a cat</b> will appear in one of the circles.</p>" +
         "<p>Your task will be to press the button corresponding to the position of the cat.</p>" +
         "<p>Press any key to continue!</p>"
 };
@@ -36,34 +36,33 @@ const end = { //define end of experiment message
         "<p>Thank you for participating!</p>"
 };
 
-const subject_id = Math.floor(Math.random()*100000) //generate a random subject number
-const sequences = [[0,1,2,3],[0,2,1,3]]; //define possible sequences: 4 positions (0 for first etc.)
+const subject_id = Math.floor(Math.random() * 100000) //generate a random subject number
+const sequences = [[0, 1, 2, 3], [0, 2, 1, 3]]; //define possible sequences: 4 positions (0 for first etc.)
 const usedSequence = sequences[Math.floor(Math.random() * sequences.length)]; //choose a random sequence from the list of sequences
-const responseKeys = [['s','d','j','k']]; //response keys settings
+const responseKeys = [['s', 'd', 'j', 'k']]; //response keys settings
 
 /* define feedback message - based on only the first button press for the given stimulus */
 
 const feedback = {
     type: "html-keyboard-response",
-    stimulus: function() {
+    stimulus: function () {
         let trials = jsPsych.data.get();
         let blockNum = jsPsych.data.get().last(1).values()[0].block; //relies only on the performance in the last block
         let correct_trials = trials.filter({correct: true, block: blockNum, firstResponse: 1}); //only: correct response, last block, first button press for a given trial
         let numberOfTrials = trials.filter({block: blockNum, firstResponse: 1}).count(); //number of DIFFERENT trials
         let accuracy = Math.round(correct_trials.count() / numberOfTrials * 100); //mean accuracy in the given block
         let rt = Math.round(correct_trials.select('rt').mean()); //mean rt of the given block
-        if(accuracy < 92){ //if mean accuracy is less than 92, show this message
+        let message;
+        if (accuracy < 92) { //if mean accuracy is less than 92, show this message
             message = "<p class='message'><strong>Try to be more accurate!</strong></p>"
-        }
-        else if (rt > 500){ //if mean rt is higher than 500, show this message
+        } else if (rt > 500) { //if mean rt is higher than 500, show this message
             message = "<p class='message'><strong>Try to be faster!</strong></p>"
-        }
-        else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
+        } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
             message = "<p class='message'><strong>Please continue!</strong></p>"
         }
         return "<h2>End of block " + blockNum + "</h2>" +
-            "<p>Your accuracy: "+accuracy+"%</p>"+
-            "<p>Your average response time: "+rt+" ms</p>"+ message +
+            "<p>Your accuracy: " + accuracy + "%</p>" +
+            "<p>Your average response time: " + rt + " ms</p>" + message +
             "<h3 class='continue'>Press any key to continue!</h3>";
     }
 }
@@ -71,13 +70,6 @@ const feedback = {
 const images = ['static/images/memo_logo.jpg']; //preload memo logo (stim images are preloaded automatically)
 
 /*FUNCTIONS*/
-
-/*function for pattern trial procedures*/
-
-function TrialProcs(timeline, timelineVariables){
-    this.timeline = timeline,
-        this.timeline_variables = timelineVariables
-}
 
 /*function for incorrect pattern trial procedures*/
 
@@ -126,8 +118,8 @@ function randomIfInsert(){
 
 /*function for inserting conditional after incorrect response*/
 
-function insertConditionalAfterIncorrectResponse(element){
-    for (i=0; i < 100; i++){
+function insertConditionalAfterIncorrectResponse(element) {
+    for (let i = 0; i < 100; i++) {
         timeline.push(element);
     }
 }
@@ -143,8 +135,9 @@ jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 /*set properties of pattern trials*/
 
-let patternTrialProperties = {type: "serial-reaction-time",
-    grid: [[1,1,1,1]],
+let patternTrialProperties = {
+    type: "serial-reaction-time",
+    grid: [[1, 1, 1, 1]],
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120, //RSI in ms
@@ -153,8 +146,9 @@ let patternTrialProperties = {type: "serial-reaction-time",
     response_ends_trial: true,
 }
 
-let patternIfTrialProperties = {type: "serial-reaction-time",
-    grid: [[1,1,1,1]],
+let patternIfTrialProperties = {
+    type: "serial-reaction-time",
+    grid: [[1, 1, 1, 1]],
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0, //RSI set to 0 after incorrect response
@@ -163,16 +157,11 @@ let patternIfTrialProperties = {type: "serial-reaction-time",
     response_ends_trial: true, //the default target_color, i.e. the "target stimulus" is set in the source code
 }
 
-for(p=1; p < 5; p++){ //create 4 pattern variables
-    this["pattern"+p] = patternTrialProperties
-    this["pattern"+p+"If"] = patternIfTrialProperties
-}
-
 /*set properties of random trials*/
 
 let randomTrialProperties = {
     type: "serial-reaction-time",
-    grid: [[1,1,1,1]],
+    grid: [[1, 1, 1, 1]],
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120,
@@ -183,7 +172,7 @@ let randomTrialProperties = {
 
 let randomIfTrialProperties = {
     type: "serial-reaction-time",
-    grid: [[1,1,1,1]],
+    grid: [[1, 1, 1, 1]],
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0,

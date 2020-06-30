@@ -67,7 +67,7 @@ const feedback = {
     }
 }
 
-const images = ['static/images/memo_logo.jpg']; //preload memo logo (stim images are preloaded automatically)
+const images = ['static/images/memo_logo.jpg']; //preload memo logo (stimuli images are preloaded automatically)
 
 /*FUNCTIONS*/
 
@@ -86,7 +86,7 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 function randomStimulusProcedureGenerator(block) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1}}] //jspsych.init modifies if necessary
+    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1}}] //jsPsych.init modifies if necessary
     return {
         timeline: [random],
         timeline_variables: randomStimulus
@@ -248,7 +248,7 @@ jsPsych.init({
     on_finish: function () {
         jsPsych.data.displayData(); //display data at the end
         const interactionData = jsPsych.data.getInteractionData();
-        console.log(interactionData.json()); //prints out the interacton events
+        console.log(interactionData.json()); //prints out the interaction events
         console.log(jsPsych.data.get().csv()); //prints out experiment output
         jsPsych.data.get().localSave('csv', 'output.csv'); //saves experiment output to .csv file
     }

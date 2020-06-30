@@ -233,23 +233,23 @@ timeline.push(end)
 jsPsych.init({
     timeline: timeline,
     preload_images: images,
-    on_data_update: function(){  //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
-        lastTrialMinus1 = jsPsych.data.get().last(2).values()[0]
-        lastTrial = jsPsych.data.get().last(1).values()[0]
-        if(typeof(lastTrial.target) != "undefined"){
-            if(lastTrialMinus1.correct == false){
-                if(lastTrial.target == lastTrialMinus1.target){
+    on_data_update: function () {  //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
+        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0]
+        let lastTrial = jsPsych.data.get().last(1).values()[0]
+        if (typeof (lastTrial.target) != "undefined") {
+            if (lastTrialMinus1.correct === false) {
+                if (lastTrial.target === lastTrialMinus1.target) {
                     lastTrial.firstResponse = 0
                 }
             }
 
         }
     },
-    on_finish: function() {
+    on_finish: function () {
         jsPsych.data.displayData(); //display data at the end
-        var interactionData = jsPsych.data.getInteractionData();
+        const interactionData = jsPsych.data.getInteractionData();
         console.log(interactionData.json()); //prints out the interacton events
         console.log(jsPsych.data.get().csv()); //prints out experiment output
-        jsPsych.data.get().localSave('csv','output.csv'); //saves experiment output to .csv file
+        jsPsych.data.get().localSave('csv', 'output.csv'); //saves experiment output to .csv file
     }
 })

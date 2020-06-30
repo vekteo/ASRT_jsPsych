@@ -73,47 +73,38 @@ const images = ['static/images/memo_logo.jpg']; //preload memo logo (stim images
 
 /*function for incorrect pattern trial procedures*/
 
-function IncorrectTrialProcs(timeline, timelineVariables){
-    this.timeline = timeline,
-        this.timeline_variables = timelineVariables,
-        this.conditional_function = function(){ //function only happens is response is not correct!
-            var data = jsPsych.data.get().last(1).values()[0];
-            if(data.correct == true){
-                return false;
-            } else {
-                return true;
-            }
-        }
+function IncorrectTrialProcs(timeline, timelineVariables) {
+    this.timeline = timeline
+    this.timeline_variables = timelineVariables
+    this.conditional_function = function () { //function only happens is response is not correct!
+        const data = jsPsych.data.get().last(1).values()[0];
+        return data.correct !== true;
+    }
 }
 
 /*function for random stimulus generation*/
 
-function randomStimulusProcedureGenerator(){
-    newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{ stimulus: [0,newRandom], data: {tripletType: "R", block: j, firstResponse: 1}}] //jspsych.init modifies if necessary
-    let randomProc = {
+function randomStimulusProcedureGenerator(block) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1}}] //jspsych.init modifies if necessary
+    return {
         timeline: [random],
         timeline_variables: randomStimulus
     }
-    return randomProc
-};
+}
+
 
 /*function for inserting the same random element after incorrect response*/
 
-function randomIfInsert(){
-    let randomProcIf = {
+function randomIfInsert(actualRandom) {
+    return {
         timeline: [randomIf],
         timeline_variables: actualRandom.timeline_variables,
-        conditional_function: function(){ //function only happens is response is not correct!
+        conditional_function: function () { //function only happens is response is not correct!
             let data = jsPsych.data.get().last(1).values()[0];
-            if(data.correct == true){
-                return false;
-            } else {
-                return true;
-            }
+            return data.correct !== true;
         }
     }
-    return randomProcIf
 }
 
 /*function for inserting conditional after incorrect response*/

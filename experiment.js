@@ -37,8 +37,7 @@ const end = { //define end of experiment message
 };
 
 const subject_id = Math.floor(Math.random() * 100000) //generate a random subject number
-const sequences = [[0, 1, 2, 3], [0, 2, 1, 3]]; //define possible sequences: 4 positions (0 for first etc.)
-const usedSequence = sequences[Math.floor(Math.random() * sequences.length)]; //choose a random sequence from the list of sequences
+const usedSequence = shuffleSequence([0, 1, 2, 3]) //the 4 possible positions of the sequence (function shuffles them)
 const responseKeys = [['s', 'd', 'j', 'k']]; //response keys settings
 
 /* define feedback message - based on only the first button press for the given stimulus */
@@ -70,6 +69,18 @@ const feedback = {
 const images = ['static/images/memo_logo.jpg']; //preload memo logo (stimuli images are preloaded automatically)
 
 /*FUNCTIONS*/
+
+/* function for shuffling the sequence positions */
+
+function shuffleSequence(sequence) {
+    for (var i = sequence.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = sequence[i];
+        sequence[i] = sequence[j];
+        sequence[j] = temp;
+    }
+    return sequence
+}
 
 /*function for incorrect pattern trial procedures*/
 
@@ -205,6 +216,8 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     /*create all remaining block elements*/
     for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
+            let dataForPattern = {tripletType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8)} //output parameters for pattern stimuli
+            actualRandom = randomStimulusProcedureGenerator(j,n+n+6+(k*8))
             timeline.push(actualRandom);
             insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
             let patternTrialProc = {

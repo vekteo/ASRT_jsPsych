@@ -255,8 +255,17 @@ jsPsych.init({
                     lastTrial.firstResponse = 0
                 }
             }
-
+        lastTrial.correctPos = parseInt(lastTrial.target[3])+1 //write the correct position in a separate column (1-4, from left to right)
+        lastTrial.correctRespButton = responseKeys[0][0,parseInt(lastTrial.target[3])] //write the name of the correct response button in a separate column 
+        lastTrial.respButton = String.fromCharCode(lastTrial.key_press).toLowerCase() //write the name of the response button in a separate column
+        if (lastTrial.trialNumber == lastTrialMinus1.trialNumber){ //write cumulative RT in a separate column (the RT from stimulus appeared to CORRECT response)
+            lastTrial.cumulativeRT = lastTrial.rt + lastTrialMinus1.cumulativeRT
         }
+        else {
+            lastTrial.cumulativeRT = lastTrial.rt
+        }
+    }
+        
     },
     on_finish: function () {
         jsPsych.data.displayData(); //display data at the end

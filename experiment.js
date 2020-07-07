@@ -95,7 +95,7 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 /*function for random stimulus generation*/
 
-function randomStimulusProcedureGenerator(block, trialNumber) {
+function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber}}] //jsPsych.init modifies if necessary
     return {
@@ -104,12 +104,11 @@ function randomStimulusProcedureGenerator(block, trialNumber) {
     }
 }
 
-
 /*function for inserting the same random element after incorrect response*/
 
-function randomIfInsert(actualRandom) {
+function randomRepeat(actualRandom) {
     return {
-        timeline: [randomIf],
+        timeline: [randomIncorrect],
         timeline_variables: actualRandom.timeline_variables,
         conditional_function: function () { //function only happens is response is not correct!
             let data = jsPsych.data.get().last(1).values()[0];
@@ -120,7 +119,7 @@ function randomIfInsert(actualRandom) {
 
 /*function for inserting conditional after incorrect response*/
 
-function insertConditionalAfterIncorrectResponse(element) {
+function insertRepetition(element) {
     for (let i = 0; i < 100; i++) {
         timeline.push(element);
     }
@@ -148,7 +147,7 @@ let patternTrialProperties = {
     response_ends_trial: true,
 }
 
-let patternIfTrialProperties = {
+let patternIncorrectTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1, 1, 1, 1]],
     choices: responseKeys,
@@ -172,7 +171,7 @@ let randomTrialProperties = {
     response_ends_trial: true,
 };
 
-let randomIfTrialProperties = {
+let randomIncorrectTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1, 1, 1, 1]],
     choices: responseKeys,
@@ -184,7 +183,7 @@ let randomIfTrialProperties = {
 };
 
 let random = randomTrialProperties
-let randomIf = randomIfTrialProperties
+let randomIncorrect = randomIncorrectTrialProperties
 
 /*set up blocks*/
 
@@ -194,9 +193,9 @@ let actualRandom;
 
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
     for (let l = 1; l < 5; l++) {
-        actualRandom = randomStimulusProcedureGenerator(j,l);
+        actualRandom = randomStimulusProc(j,l);
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+        insertRepetition(randomRepeat(actualRandom));
     }
     timeline.push(feedback);
 }
@@ -208,29 +207,29 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
 
     /* first five random stimuli at the beginning of the block*/
     for (let l = 1; l < 6; l++) {
-        actualRandom = randomStimulusProcedureGenerator(j,l)
+        actualRandom = randomStimulusProc(j,l)
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+        insertRepetition(randomRepeat(actualRandom));
     }
 
     /*create all remaining block elements*/
     for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
             let dataForPattern = {tripletType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8)} //output parameters for pattern stimuli
-            actualRandom = randomStimulusProcedureGenerator(j,n+n+6+(k*8))
+            actualRandom = randomStimulusProc(j,n+n+6+(k*8))
             timeline.push(actualRandom);
-            insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+            insertRepetition(randomRepeat(actualRandom));
             let patternTrialProc = {
                 timeline: [patternTrialProperties],
                 timeline_variables: [{stimulus: [0, usedSequence[n]], data: dataForPattern}]
             }
             timeline.push(patternTrialProc)
             ;
-            let incorrectTrialProc = new IncorrectTrialProcs([patternIfTrialProperties], [{
+            let patternIncorrectTrialProc = new IncorrectTrialProcs([patternIncorrectTrialProperties], [{
                 stimulus: [0, usedSequence[n]],
                 data: dataForPattern
             }]);
-            insertConditionalAfterIncorrectResponse(incorrectTrialProc)
+            insertRepetition(patternIncorrectTrialProc)
         }
     }
 

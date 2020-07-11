@@ -37,8 +37,7 @@ const end = { //define end of experiment message
 };
 
 const subject_id = Math.floor(Math.random() * 100000) //generate a random subject number
-const sequences = [[0, 1, 2, 3], [0, 2, 1, 3]]; //define possible sequences: 4 positions (0 for first etc.)
-const usedSequence = sequences[Math.floor(Math.random() * sequences.length)]; //choose a random sequence from the list of sequences
+const usedSequence = shuffleSequence([0, 1, 2, 3]) //the 4 possible positions of the sequence (function shuffles them)
 const responseKeys = [['s', 'd', 'j', 'k']]; //response keys settings
 
 /* define feedback message - based on only the first button press for the given stimulus */
@@ -71,6 +70,18 @@ const images = ['static/images/memo_logo.jpg']; //preload memo logo (stimuli ima
 
 /*FUNCTIONS*/
 
+/* function for shuffling the sequence positions */
+
+function shuffleSequence(sequence) {
+    for (var i = sequence.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = sequence[i];
+        sequence[i] = sequence[j];
+        sequence[j] = temp;
+    }
+    return sequence
+}
+
 /*function for incorrect pattern trial procedures*/
 
 function IncorrectTrialProcs(timeline, timelineVariables) {
@@ -84,21 +95,20 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 /*function for random stimulus generation*/
 
-function randomStimulusProcedureGenerator(block) {
+function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1}}] //jsPsych.init modifies if necessary
+    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber}}] //jsPsych.init modifies if necessary
     return {
         timeline: [random],
         timeline_variables: randomStimulus
     }
 }
 
-
 /*function for inserting the same random element after incorrect response*/
 
-function randomIfInsert(actualRandom) {
+function randomRepeat(actualRandom) {
     return {
-        timeline: [randomIf],
+        timeline: [randomIncorrect],
         timeline_variables: actualRandom.timeline_variables,
         conditional_function: function () { //function only happens is response is not correct!
             let data = jsPsych.data.get().last(1).values()[0];
@@ -109,7 +119,7 @@ function randomIfInsert(actualRandom) {
 
 /*function for inserting conditional after incorrect response*/
 
-function insertConditionalAfterIncorrectResponse(element) {
+function insertRepetition(element) {
     for (let i = 0; i < 100; i++) {
         timeline.push(element);
     }
@@ -137,7 +147,7 @@ let patternTrialProperties = {
     response_ends_trial: true,
 }
 
-let patternIfTrialProperties = {
+let patternIncorrectTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1, 1, 1, 1]],
     choices: responseKeys,
@@ -161,7 +171,7 @@ let randomTrialProperties = {
     response_ends_trial: true,
 };
 
-let randomIfTrialProperties = {
+let randomIncorrectTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1, 1, 1, 1]],
     choices: responseKeys,
@@ -173,17 +183,19 @@ let randomIfTrialProperties = {
 };
 
 let random = randomTrialProperties
-let randomIf = randomIfTrialProperties
+let randomIncorrect = randomIncorrectTrialProperties
 
 /*set up blocks*/
 
 let actualRandom;
+
 /* practice blocks*/
+
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
     for (let l = 1; l < 5; l++) {
-        actualRandom = randomStimulusProcedureGenerator(j);
+        actualRandom = randomStimulusProc(j,l);
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+        insertRepetition(randomRepeat(actualRandom));
     }
     timeline.push(feedback);
 }
@@ -192,32 +204,32 @@ timeline.push(instructions3);
 /* set up pattern protocols */
 
 for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
-    let dataForPattern = {tripletType: "P", block: j, firstResponse: 1} //output parameters for pattern stimuli
 
     /* first five random stimuli at the beginning of the block*/
     for (let l = 1; l < 6; l++) {
-        actualRandom = randomStimulusProcedureGenerator(j)
+        actualRandom = randomStimulusProc(j,l)
         timeline.push(actualRandom);
-        insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+        insertRepetition(randomRepeat(actualRandom));
     }
 
     /*create all remaining block elements*/
     for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
-            actualRandom = randomStimulusProcedureGenerator(j)
+            let dataForPattern = {tripletType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8)} //output parameters for pattern stimuli
+            actualRandom = randomStimulusProc(j,n+n+6+(k*8))
             timeline.push(actualRandom);
-            insertConditionalAfterIncorrectResponse(randomIfInsert(actualRandom));
+            insertRepetition(randomRepeat(actualRandom));
             let patternTrialProc = {
                 timeline: [patternTrialProperties],
                 timeline_variables: [{stimulus: [0, usedSequence[n]], data: dataForPattern}]
             }
             timeline.push(patternTrialProc)
             ;
-            let incorrectTrialProc = new IncorrectTrialProcs([patternIfTrialProperties], [{
+            let patternIncorrectTrialProc = new IncorrectTrialProcs([patternIncorrectTrialProperties], [{
                 stimulus: [0, usedSequence[n]],
                 data: dataForPattern
             }]);
-            insertConditionalAfterIncorrectResponse(incorrectTrialProc)
+            insertRepetition(patternIncorrectTrialProc)
         }
     }
 
@@ -242,8 +254,17 @@ jsPsych.init({
                     lastTrial.firstResponse = 0
                 }
             }
-
+        lastTrial.correctPos = parseInt(lastTrial.target[3])+1 //write the correct position in a separate column (1-4, from left to right)
+        lastTrial.correctRespButton = responseKeys[0][parseInt(lastTrial.target[3])] //write the name of the correct response button in a separate column
+        lastTrial.respButton = String.fromCharCode(lastTrial.key_press).toLowerCase() //write the name of the response button in a separate column
+        if (lastTrial.trialNumber == lastTrialMinus1.trialNumber){ //write cumulative RT in a separate column (the RT from stimulus appeared to CORRECT response)
+            lastTrial.cumulativeRT = lastTrial.rt + lastTrialMinus1.cumulativeRT
         }
+        else {
+            lastTrial.cumulativeRT = lastTrial.rt
+        }
+    }
+        
     },
     on_finish: function () {
         jsPsych.data.displayData(); //display data at the end

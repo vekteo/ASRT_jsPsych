@@ -245,8 +245,11 @@ timeline.push(end)
 jsPsych.init({
     timeline: timeline,
     preload_images: images,
-    on_data_update: function () {  //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
-        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0]
+    on_data_update: function () {  
+
+        /*output properties*/
+
+        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0] //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
         let lastTrial = jsPsych.data.get().last(1).values()[0]
         if (typeof (lastTrial.target) != "undefined") {
             if (lastTrialMinus1.correct === false) {
@@ -262,6 +265,38 @@ jsPsych.init({
         }
         else {
             lastTrial.cumulativeRT = lastTrial.rt
+        }
+
+        /*calculate triplet types*/
+
+        var i = 2; // search for the second element of the sequence
+        while (jsPsych.data.get().last(i).values()[0].correct == false) {
+            i++;
+        }
+
+        var k = i+1; //search for the third element of the sequence
+        while (jsPsych.data.get().last(k).values()[0].correct == false) {
+            k++;
+        }
+
+        actualTriplet = [jsPsych.data.get().last(k).values()[0].correctPos,jsPsych.data.get().last(i).values()[0].correctPos, lastTrial.correctPos]
+        let actualTripletString = actualTriplet.join().replace(/,/g, "");
+        lastTrial.actualTriplet = actualTripletString //write the actual triplet to a separate column
+
+        if (lastTrial.isPractice == 1 || lastTrial.trialNumber <= 7) { //if practice block or first 7 element
+            lastTrial.tripletType = "X" //trials to exclude
+        }
+        else if (usedSequenceString.includes(actualTripletString[0] + actualTripletString[2])) { //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
+            lastTrial.tripletType = "H" //high-probability triplet
+        }
+        else if (actualTriplet[0] == actualTriplet[1] && actualTriplet[1] == actualTriplet[2]) { //if all 3 elements are identical
+            lastTrial.tripletType = "R" //repetition
+        }
+        else if (actualTriplet[0] == actualTriplet[2] && actualTriplet[0] != actualTriplet[1]) { //if 1st and 3rd elements are identical
+            lastTrial.tripletType = "T" //trill
+        }
+        else {
+            lastTrial.tripletType = "L" //low-probability triplet
         }
     }
         

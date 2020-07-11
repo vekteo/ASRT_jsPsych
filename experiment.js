@@ -98,9 +98,9 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 /*function for random stimulus generation*/
 
-function randomStimulusProc(block, trialNumber) {
+function randomStimulusProc(block, trialNumber, isPractice) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber}}] //jsPsych.init modifies if necessary
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: isPractice}}] //jsPsych.init modifies if necessary
     return {
         timeline: [random],
         timeline_variables: randomStimulus
@@ -196,7 +196,7 @@ let actualRandom;
 
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
     for (let l = 1; l < 5; l++) {
-        actualRandom = randomStimulusProc(j,l);
+        actualRandom = randomStimulusProc(j,l,1);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
@@ -210,7 +210,7 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
 
     /* first five random stimuli at the beginning of the block*/
     for (let l = 1; l < 6; l++) {
-        actualRandom = randomStimulusProc(j,l)
+        actualRandom = randomStimulusProc(j,l,0)
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
@@ -218,8 +218,8 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     /*create all remaining block elements*/
     for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
-            let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8)} //output parameters for pattern stimuli
-            actualRandom = randomStimulusProc(j,n+n+6+(k*8))
+            let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
+            actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)
             timeline.push(actualRandom);
             insertRepetition(randomRepeat(actualRandom));
             let patternTrialProc = {

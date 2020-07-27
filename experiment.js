@@ -100,7 +100,18 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 function randomStimulusProc(block, trialNumber, isPractice) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: isPractice}}] //jsPsych.init modifies if necessary
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [random],
+        timeline_variables: randomStimulus
+    }
+}
+
+/*function for random stimulus generation in the practice session*/
+
+function randomStimulusProcPractice(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
         timeline: [random],
         timeline_variables: randomStimulus
@@ -196,7 +207,7 @@ let actualRandom;
 
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
     for (let l = 1; l < 5; l++) {
-        actualRandom = randomStimulusProc(j,l,1);
+        actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
@@ -210,7 +221,7 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
 
     /* first five random stimuli at the beginning of the block*/
     for (let l = 1; l < 6; l++) {
-        actualRandom = randomStimulusProc(j,l,0)
+        actualRandom = randomStimulusProc(j,l)
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }

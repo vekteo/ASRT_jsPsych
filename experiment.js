@@ -215,6 +215,8 @@ for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
 }
 timeline.push(instructions3);
 
+let numberOfIncorrect = 0;
+
 /* set up pattern protocols */
 
 for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
@@ -293,21 +295,23 @@ jsPsych.init({
 
         var thirdTripletElementIndex = arrayOfCorrectness.lastIndexOf(true,secondTripletElementIndex-1) //find second last correct response and take its index
 
-        if (lastTrial.isPractice == 1 || lastTrial.trialNumber <= 7) { //if practice block or first 7 element
-            lastTrial.tripletType = "X" //trials to exclude
-        }
-        else if (usedSequenceString.includes(actualTripletString[0] + actualTripletString[2])) { //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
-            lastTrial.tripletType = "H" //high-probability triplet
-        }
-        else if (actualTriplet[0] == actualTriplet[1] && actualTriplet[1] == actualTriplet[2]) { //if all 3 elements are identical
-            lastTrial.tripletType = "R" //repetition
-        }
-        else if (actualTriplet[0] == actualTriplet[2] && actualTriplet[0] != actualTriplet[1]) { //if 1st and 3rd elements are identical
-            lastTrial.tripletType = "T" //trill
-        }
-        else {
-            lastTrial.tripletType = "L" //low-probability triplet
-        }
+        /* define the elements of the triplet*/
+
+        actualTriplet = 
+            lastTrial.trialNumber == 1 ? ["","",lastTrial.correctPos] :
+            lastTrial.trialNumber == 2 ? ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos] :
+            [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correctPos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos];
+
+        lastTrial.actualTriplet = actualTriplet.join().replace(/,/g, ""); //write the actual triplet to a separate column as a string
+
+        /*define actual triplet as x, high, low, repetition or trill*/
+
+        lastTrial.tripletType = 
+            lastTrial.isPractice == 1 || lastTrial.trialNumber <= 7 ? "X" : //if practice block or first 7 element
+            usedSequenceString.includes(lastTrial.actualTriplet[0] + lastTrial.actualTriplet[2]) ? "H" : //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
+            actualTriplet[0] == actualTriplet[1] && actualTriplet[1] == actualTriplet[2] ? "R" : //if all 3 elements are identical
+            actualTriplet[0] == actualTriplet[2] && actualTriplet[0] != actualTriplet[1] ? "T" : //if 1st and 3rd elements are identical
+            "L"; //else: low-probability triplet
     }
         
     },

@@ -283,21 +283,17 @@ jsPsych.init({
             lastTrial.cumulativeRT = lastTrial.rt
         }
 
-        /*calculate triplet types*/
+    /*calculate triplet types*/
 
-        var i = 2; // search for the second element of the sequence
-        while (jsPsych.data.get().last(i).values()[0].correct == false) {
-            i++;
-        }
+        var arrayOfCorrectness = jsPsych.data.get().select('correct').values;
+        let lengthOfTrials = arrayOfCorrectness.length
+        let isCurrentCorrect = lastTrial.correct
 
-        var k = i+1; //search for the third element of the sequence
-        while (jsPsych.data.get().last(k).values()[0].correct == false) {
-            k++;
-        }
+        var secondTripletElementIndex = //find last correct response and take its index
+            isCurrentCorrect ? arrayOfCorrectness.lastIndexOf(true, arrayOfCorrectness.lastIndexOf(true)-1) :
+            arrayOfCorrectness.lastIndexOf(true)
 
-        actualTriplet = [jsPsych.data.get().last(k).values()[0].correctPos,jsPsych.data.get().last(i).values()[0].correctPos, lastTrial.correctPos]
-        let actualTripletString = actualTriplet.join().replace(/,/g, "");
-        lastTrial.actualTriplet = actualTripletString //write the actual triplet to a separate column
+        var thirdTripletElementIndex = arrayOfCorrectness.lastIndexOf(true,secondTripletElementIndex-1) //find second last correct response and take its index
 
         /* define the elements of the triplet*/
 

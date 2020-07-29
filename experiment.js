@@ -283,15 +283,15 @@ jsPsych.init({
 
     /*calculate triplet types*/
 
-        var arrayOfCorrectness = jsPsych.data.get().select('correct').values;
-        let lengthOfTrials = arrayOfCorrectness.length
+        var areTrialsCorrect = jsPsych.data.get().select('correct').values;
+        let lengthOfTrials = areTrialsCorrect.length
         let isCurrentCorrect = lastTrial.correct
 
         var secondTripletElementIndex = //find last correct response and take its index
-            isCurrentCorrect ? arrayOfCorrectness.lastIndexOf(true, arrayOfCorrectness.lastIndexOf(true)-1) :
-            arrayOfCorrectness.lastIndexOf(true)
+            isCurrentCorrect ? areTrialsCorrect.lastIndexOf(true, areTrialsCorrect.lastIndexOf(true)-1) :
+            areTrialsCorrect.lastIndexOf(true)
 
-        var thirdTripletElementIndex = arrayOfCorrectness.lastIndexOf(true,secondTripletElementIndex-1) //find second last correct response and take its index
+        var thirdTripletElementIndex = areTrialsCorrect.lastIndexOf(true,secondTripletElementIndex-1) //find second last correct response and take its index
 
         /* define the elements of the triplet*/
 

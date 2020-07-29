@@ -98,7 +98,7 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 /*function for random stimulus generation*/
 
-function randomStimulusProc(block, trialNumber, isPractice) {
+function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
     return {

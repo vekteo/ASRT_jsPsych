@@ -295,10 +295,11 @@ jsPsych.init({
 
         /* define the elements of the triplet*/
 
-        actualTriplet = 
-            lastTrial.trialNumber == 1 ? ["","",lastTrial.correctPos] :
-            lastTrial.trialNumber == 2 ? ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos] :
-            [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correctPos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos];
+        if(lastTrial.trialNumber == 1) {
+            actualTriplet = ["","",lastTrial.correctPos]
+        }
+        else if (lastTrial.trialNumber == 2) {
+            actualTriplet = ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos]
         }
         else {
             actualTriplet = [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correctPos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos];

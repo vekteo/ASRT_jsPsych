@@ -39,6 +39,9 @@ const end = { //define end of experiment message
 const subject_id = Math.floor(Math.random() * 100000) //generate a random subject number
 const usedSequence = shuffleSequence([0, 1, 2, 3]) //the 4 possible positions of the sequence (function shuffles them)
 const responseKeys = [['s', 'd', 'j', 'k']]; //response keys settings
+const usedSequencePos = usedSequence.map(v=> v+1) //the sequence positions from 1-4
+const usedSequenceString = usedSequencePos.join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
+let actualTriplet;
 
 /* define feedback message - based on only the first button press for the given stimulus */
 
@@ -97,7 +100,18 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {tripletType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber}}] //jsPsych.init modifies if necessary
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [random],
+        timeline_variables: randomStimulus
+    }
+}
+
+/*function for random stimulus generation in the practice session*/
+
+function randomStimulusProcPractice(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
         timeline: [random],
         timeline_variables: randomStimulus
@@ -193,7 +207,7 @@ let actualRandom;
 
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
     for (let l = 1; l < 5; l++) {
-        actualRandom = randomStimulusProc(j,l);
+        actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
@@ -215,8 +229,8 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     /*create all remaining block elements*/
     for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
-            let dataForPattern = {tripletType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8)} //output parameters for pattern stimuli
-            actualRandom = randomStimulusProc(j,n+n+6+(k*8))
+            let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
+            actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)
             timeline.push(actualRandom);
             insertRepetition(randomRepeat(actualRandom));
             let patternTrialProc = {
@@ -245,8 +259,11 @@ timeline.push(end)
 jsPsych.init({
     timeline: timeline,
     preload_images: images,
-    on_data_update: function () {  //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
-        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0]
+    on_data_update: function () {  
+
+        /*output properties*/
+
+        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0] //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
         let lastTrial = jsPsych.data.get().last(1).values()[0]
         if (typeof (lastTrial.target) != "undefined") {
             if (lastTrialMinus1.correct === false) {
@@ -263,9 +280,53 @@ jsPsych.init({
         else {
             lastTrial.cumulativeRT = lastTrial.rt
         }
+
+    /*calculate triplet types*/
+
+        var areTrialsCorrect = jsPsych.data.get().select('correct').values;
+        let lengthOfTrials = areTrialsCorrect.length
+        let isCurrentCorrect = lastTrial.correct
+
+        var secondTripletElementIndex = //find last correct response and take its index
+            isCurrentCorrect ? areTrialsCorrect.lastIndexOf(true, areTrialsCorrect.lastIndexOf(true)-1) :
+            areTrialsCorrect.lastIndexOf(true)
+
+        var thirdTripletElementIndex = areTrialsCorrect.lastIndexOf(true,secondTripletElementIndex-1) //find second last correct response and take its index
+
+        /* define the elements of the triplet*/
+
+        if(lastTrial.trialNumber == 1) {
+            actualTriplet = ["","",lastTrial.correctPos]
+        }
+        else if (lastTrial.trialNumber == 2) {
+            actualTriplet = ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos]
+        }
+        else {
+            actualTriplet = [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correctPos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos];
+        }
+
+        lastTrial.actualTriplet = actualTriplet.join().replace(/,/g, ""); //write the actual triplet to a separate column as a string
+
+        /*define actual triplet as x, high, low, repetition or trill*/
+
+        if (lastTrial.isPractice == 1 || lastTrial.trialNumber <= 7) { //if practice block or first 7 element
+            lastTrial.tripletType = "X" //trials to exclude
+        }
+        else if ((usedSequenceString.includes(lastTrial.actualTriplet[0] + lastTrial.actualTriplet[2])) || (usedSequenceString[3] + usedSequenceString[0] === lastTrial.actualTriplet[0] + lastTrial.actualTriplet[2])){ //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
+            lastTrial.tripletType = "H" //high-probability triplet
+        }
+        else if (actualTriplet[0] == actualTriplet[1] && actualTriplet[1] == actualTriplet[2]) { //if all 3 elements are identical
+            lastTrial.tripletType = "R" //repetition
+        }
+        else if (actualTriplet[0] == actualTriplet[2] && actualTriplet[0] != actualTriplet[1]) { //if 1st and 3rd elements are identical
+            lastTrial.tripletType = "T" //trill
+        }
+        else {
+            lastTrial.tripletType = "L" //low-probability triplet
+        }
     }
-        
-    },
+    }
+    ,
     on_finish: function () {
         jsPsych.data.displayData(); //display data at the end
         const interactionData = jsPsych.data.getInteractionData();

@@ -325,6 +325,12 @@ jsPsych.init({
             lastTrial.tripletType = "L" //low-probability triplet
         }
     }
+        /*add browser events in JSON format*/
+        let interactionData = jsPsych.data.getInteractionData()
+        const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
+        if (interactionDataOfLastTrial) {
+            lastTrial.browserEvents = JSON.stringify(interactionDataOfLastTrial)
+        }
     }
     ,
     on_finish: function () {

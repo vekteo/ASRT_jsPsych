@@ -1,9 +1,10 @@
 /*VARIABLES*/
 
 let timeline = []; //create timeline
-const welcome = { //create welcome message trial
-    type: "html-keyboard-response",
-    stimulus: "<h1>Welcome to the experiment!</h1>" +
+const instruction = {
+    type: "instructions",
+    pages: [
+        "<h1>Welcome to the experiment!</h1>" +
         "</p> Press any key to begin.</p>" +
         "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>"
 };
@@ -332,6 +333,6 @@ jsPsych.init({
         const interactionData = jsPsych.data.getInteractionData();
         console.log(interactionData.json()); //prints out the interaction events
         console.log(jsPsych.data.get().csv()); //prints out experiment output
-        jsPsych.data.get().localSave('csv', 'output.csv'); //saves experiment output to .csv file
+        jsPsych.data.get().localSave("csv", "output.csv"); //saves experiment output to .csv file
     }
 })

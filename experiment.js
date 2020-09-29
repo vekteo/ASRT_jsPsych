@@ -6,26 +6,25 @@ const instruction = {
     pages: [
         "<h1>Welcome to the experiment!</h1>" +
         "</p> Press any key to begin.</p>" +
-        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>"
-};
-const instructions1 = { //define instruction trial 1
-    type: "html-keyboard-response",
-    stimulus: "<p>In this experiment, you will see four circles on the screen.</p>" +
+        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>",
+        "<p>In this experiment, you will see four circles on the screen.</p>" +
         "<p>An <b>image of a cat</b> will appear in one of the circles.</p>" +
-        "<p>Your task will be to press the button corresponding to the position of the cat.</p>" +
-        "<p>Press any key to continue!</p>"
-};
-const instructions2 = { //define instruction trial 2
-    type: "html-keyboard-response",
-    stimulus: "<p class = 'buttons'>If the cat is in the first position, press the <strong>'S'</strong> button!</p>" +
+        "<p>Your task will be to press the button corresponding to the position of the cat.</p>",
+        "<p class = 'buttons'>If the cat is in the first position, press the <strong>'S'</strong> button!</p>" +
         "<p>If the cat is in the second position, press the <strong>'D'</strong> button!</p>" +
         "<p>If the cat is in the third position, press the <strong>'J'</strong> button!</p>" +
         "<p>If the cat is in the fourth position, press the <strong>'K'</strong> button!</p>" +
-        "<p class = 'alert'><strong>Try to be as fast and as accurate as possible!</strong></p>" +
-        "<p>If you are ready, press ANY key to start a practice!</p>"
+        "<p class = 'alert'><strong>Try to be as fast and as accurate as possible!</strong></p>"
+    ],
+    show_clickable_nav: true
+}
+
+const startPracticeInstruction = { //define instruction at the staert of the practice
+    type: "html-keyboard-response",
+    stimulus: "<p>If you are ready, press ANY key to start the practice!</p>"
 };
 
-const instructions3 = { //define instruction trial 3
+const startInstruction = { //define instruction at the staert of the experiment
     type: "html-keyboard-response",
     stimulus: "<p>The real task begins now.</p>" +
         "<p>If you are ready, press ANY key to start the task!</p>"

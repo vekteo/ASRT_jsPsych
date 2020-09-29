@@ -273,7 +273,7 @@ jsPsych.init({
 
     /*calculate triplet types*/
 
-        var areTrialsCorrect = jsPsych.data.get().select('correct').values;
+        var areTrialsCorrect = jsPsych.data.get().select("correct").values;
         let lengthOfTrials = areTrialsCorrect.length
         let isCurrentCorrect = lastTrial.correct
 

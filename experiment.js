@@ -131,9 +131,9 @@ function insertRepetition(element) {
 
 /*TIMELINE*/
 
-timeline.push(welcome);
-timeline.push(instructions1);
-timeline.push(instructions2);
+timeline.push({type: "fullscreen", fullscreen_mode: true});
+timeline.push(instruction);
+timeline.push(startPracticeInstruction)
 jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 /*set properties of pattern trials*/

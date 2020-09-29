@@ -193,8 +193,8 @@ let actualRandom;
 
 /* practice blocks*/
 
-for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
-    for (let l = 1; l < 5; l++) {
+for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 practice blocks
+    for (let l = 1; l < 5; l++) { //now 4 practice element in one block
         actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));

@@ -73,18 +73,6 @@ const images = ["static/images/memo_logo.jpg"]; //preload memo logo (stimuli ima
 
 /*FUNCTIONS*/
 
-/* function for shuffling the sequence positions */
-
-function shuffleSequence(sequence) {
-    for (var i = sequence.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = sequence[i];
-        sequence[i] = sequence[j];
-        sequence[j] = temp;
-    }
-    return sequence
-}
-
 /*function for incorrect pattern trial procedures*/
 
 function IncorrectTrialProcs(timeline, timelineVariables) {

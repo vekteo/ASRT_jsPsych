@@ -179,7 +179,7 @@ let randomIncorrectTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0,
-    target_color: "url(static/images/cat2.jpg)", //set image for random trials
+    target_color: "url(static/images/cat.jpg)", //set image for random trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,
 };

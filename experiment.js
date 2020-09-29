@@ -95,6 +95,17 @@ function randomStimulusProc(block, trialNumber) {
     }
 }
 
+/*function for first stimulus generation*/
+
+function firstStimulusProc(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [firstTrial],
+        timeline_variables: randomStimulus
+    }
+}
+
 /*function for random stimulus generation in the practice session*/
 
 function randomStimulusProcPractice(block, trialNumber) {
@@ -105,6 +116,7 @@ function randomStimulusProcPractice(block, trialNumber) {
         timeline_variables: randomStimulus
     }
 }
+
 
 /*function for inserting the same random element after incorrect response*/
 
@@ -173,6 +185,17 @@ let randomTrialProperties = {
     response_ends_trial: true,
 };
 
+let firstTrialProperties = {
+    type: "serial-reaction-time",
+    grid: [[1, 1, 1, 1]],
+    choices: responseKeys,
+    target: jsPsych.timelineVariable('stimulus'),
+    pre_target_duration: 200,
+    target_color: "url(static/images/cat.jpg)", //set image for random trials
+    data: jsPsych.timelineVariable('data'),
+    response_ends_trial: true,
+};
+
 let randomIncorrectTrialProperties = {
     type: "serial-reaction-time",
     grid: [[1, 1, 1, 1]],
@@ -184,6 +207,7 @@ let randomIncorrectTrialProperties = {
     response_ends_trial: true,
 };
 
+let firstTrial = firstTrialProperties
 let random = randomTrialProperties
 let randomIncorrect = randomIncorrectTrialProperties
 
@@ -194,7 +218,10 @@ let actualRandom;
 /* practice blocks*/
 
 for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 practice blocks
-    for (let l = 1; l < 5; l++) { //now 4 practice element in one block
+    actualRandom = firstStimulusProc(j,1) //before first element, longer delay
+    timeline.push(actualRandom);
+    insertRepetition(randomRepeat(actualRandom));
+    for (let l = 2; l < 5; l++) { //now 4 practice element in one block
         actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
@@ -208,7 +235,10 @@ timeline.push(startInstruction);
 for (let j = 1; j < 4; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
 
     /* first five random stimuli at the beginning of the block*/
-    for (let l = 1; l < 6; l++) {
+    actualRandom = firstStimulusProc(j,1) //before first element, longer delay
+    timeline.push(actualRandom);
+    insertRepetition(randomRepeat(actualRandom));
+    for (let l = 2; l < 6; l++) {
         actualRandom = randomStimulusProc(j,l)
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
@@ -323,6 +353,7 @@ jsPsych.init({
             lastTrial.browserEvents = JSON.stringify(interactionDataOfLastTrial)
  
         }
+ 
     },
     on_finish: function () {
         jsPsych.data.displayData(); //display data at the end

@@ -156,7 +156,7 @@ let patternTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120, //RSI in ms
-    target_color: "url(static/images/cat.jpg)", //set image for pattern trials
+    target_color: "url(static/images/dalmata.jpg)", //set image for pattern trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,
 }
@@ -167,7 +167,7 @@ let patternIncorrectTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0, //RSI set to 0 after incorrect response
-    target_color: "url(static/images/cat.jpg)", //set image for pattern trials
+    target_color: "url(static/images/dalmata.jpg)", //set image for pattern trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true, //the default target_color, i.e. the "target stimulus" is set in the source code
 }
@@ -180,7 +180,7 @@ let randomTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 120,
-    target_color: "url(static/images/cat.jpg)", //set image for random trials
+    target_color: "url(static/images/dalmata.jpg)", //set image for random trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,
 };
@@ -191,7 +191,7 @@ let firstTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 200,
-    target_color: "url(static/images/cat.jpg)", //set image for random trials
+    target_color: "url(static/images/dalmata.jpg)", //set image for random trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,
 };
@@ -202,7 +202,7 @@ let randomIncorrectTrialProperties = {
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
     pre_target_duration: 0,
-    target_color: "url(static/images/cat.jpg)", //set image for random trials
+    target_color: "url(static/images/dalmata.jpg)", //set image for random trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,
 };

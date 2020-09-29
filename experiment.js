@@ -242,6 +242,8 @@ for (let j = 1; j < 4; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
 
 timeline.push(end)
 
+timeline.push({type: "fullscreen", fullscreen_mode: false});
+
 /*start the experiment*/
 
 jsPsych.init({

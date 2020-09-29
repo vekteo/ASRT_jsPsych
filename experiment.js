@@ -205,7 +205,7 @@ timeline.push(startInstruction);
 
 /* set up pattern protocols */
 
-for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
+for (let j = 1; j < 4; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
 
     /* first five random stimuli at the beginning of the block*/
     for (let l = 1; l < 6; l++) {

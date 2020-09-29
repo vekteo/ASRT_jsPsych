@@ -69,7 +69,7 @@ const feedback = {
     }
 }
 
-const images = ['static/images/memo_logo.jpg']; //preload memo logo (stimuli images are preloaded automatically)
+const images = ["static/images/memo_logo.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*FUNCTIONS*/
 

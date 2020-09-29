@@ -201,7 +201,7 @@ for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 pr
     }
     timeline.push(feedback);
 }
-timeline.push(instructions3);
+timeline.push(startInstruction);
 
 /* set up pattern protocols */
 

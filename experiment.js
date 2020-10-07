@@ -17,29 +17,32 @@ const instruction = {
     type: "instructions",
     pages: [
         "<h1>Welcome to the experiment!</h1>" +
-        "</p> Press any key to begin.</p>" +
+        "</p> Click on <strong>Next</strong> to continue.</p>" +
         "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>",
-        "<p>In this experiment, you will see four circles on the screen.</p>" +
-        "<p>An <b>image of a cat</b> will appear in one of the circles.</p>" +
-        "<p>Your task will be to press the button corresponding to the position of the cat.</p>",
-        "<p class = 'buttons'>If the cat is in the first position, press the <strong>'S'</strong> button!</p>" +
-        "<p>If the cat is in the second position, press the <strong>'D'</strong> button!</p>" +
-        "<p>If the cat is in the third position, press the <strong>'J'</strong> button!</p>" +
-        "<p>If the cat is in the fourth position, press the <strong>'K'</strong> button!</p>" +
-        "<p class = 'alert'><strong>Try to be as fast and as accurate as possible!</strong></p>"
+        "<p>In this experiment, you will see four circles on the screen. From left to right, the <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> keys correspond to the four circles.</p>" +
+        "<div class='float: center;'><img src='static/images/circles.png' height='156px' width='346px' alt='Circles'/></div>" +
+        "<p>An <b>image of a dog</b> will appear in one of the circles.</p>" +
+        "<div class='float: center;'><img src='static/images/dalmata.jpg' height='100px' width='100px' alt='Dalmata'/></div>" +
+        "<p>Your task will be to press the key corresponding to the position of the dog <strong>as quickly and as accurately as you can</strong>.",
+        "<p>Your will need to press the <strong>'S'</strong> key with the middle finger of your left hand," +
+        "<p>the <strong>'F'</strong> key with the index finger of your left hand</strong>" +
+        "<p>the <strong>'J'</strong> key with the index finger of your right hand," +
+        "<p>the <strong>'L'</strong> key with the middle finger of your right hand</strong>" +
+        "<div class='float: center;'><img src='static/images/hand.jpg' height='300px' width='500px' alt='Hand'/></div>" +
+        "<p>If the instructions are clear, click on <strong>Next</strong>; if not, you can go back and check the instructions again by clinking on <strong>Previous</strong>.</p>"
     ],
     show_clickable_nav: true
 }
 
 const startPracticeInstruction = { //define instruction at the staert of the practice
     type: "html-keyboard-response",
-    stimulus: "<p>If you are ready, press ANY key to start the practice!</p>"
+    stimulus: "<p>If you are ready, press <strong>ANY</strong> key to start a practice!</p>"
 };
 
-const startInstruction = { //define instruction at the staert of the experiment
+const startInstruction = { //define instruction at the start of the experiment
     type: "html-keyboard-response",
     stimulus: "<p>The real task begins now.</p>" +
-        "<p>If you are ready, press ANY key to start the task!</p>"
+        "<p>If you are ready, press <strong>ANY</strong> key to start the task!</p>"
 };
 
 const end = { //define end of experiment message

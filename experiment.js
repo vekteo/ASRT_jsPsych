@@ -115,6 +115,17 @@ function randomStimulusProc(block, trialNumber) {
     }
 }
 
+/*function for first stimulus generation in the practice session*/
+
+function firstStimulusProcPractice(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [firstTrial],
+        timeline_variables: randomStimulus
+    }
+}
+
 /*function for first stimulus generation*/
 
 function firstStimulusProc(block, trialNumber) {

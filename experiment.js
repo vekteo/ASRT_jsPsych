@@ -298,7 +298,6 @@ for (let j = 1; j < 21; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER 
     }
 
     /*show feedback after the end of the block*/
-
     timeline.push(feedback);
 
     /*do not show blockStart event after the last block*/
@@ -393,10 +392,6 @@ jsPsych.init({
  
     },
     on_finish: function () {
-        jsPsych.data.displayData(); //display data at the end
-        const interactionData = jsPsych.data.getInteractionData();
-        console.log(interactionData.json()); //prints out the interaction events
-        console.log(jsPsych.data.get().csv()); //prints out experiment output
         jsPsych.data.get().localSave("csv", "output.csv"); //saves experiment output to .csv file
     }
 })

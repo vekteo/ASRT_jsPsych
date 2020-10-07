@@ -70,9 +70,9 @@ const feedback = {
         let accuracy = Math.round(correct_trials.count() / numberOfTrials * 100); //mean accuracy in the given block
         let rt = Math.round(correct_trials.select('rt').mean()); //mean rt of the given block
         let message;
-        if (accuracy < 92) { //if mean accuracy is less than 92, show this message
+        if (accuracy < 90) { //if mean accuracy is less than 90, show this message
             message = "<p class='message'><strong>Try to be more accurate!</strong></p>"
-        } else if (rt > 500) { //if mean rt is higher than 500, show this message
+        } else if (accuracy >= 93 && rt > 200) { //if mean rt is higher than 200 ms, and accuracy than 92%, show this message
             message = "<p class='message'><strong>Try to be faster!</strong></p>"
         } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
             message = "<p class='message'><strong>Please continue!</strong></p>"

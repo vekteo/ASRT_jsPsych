@@ -265,7 +265,7 @@ for (let j = 1; j < 4; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     }
 
     /*create all remaining block elements*/
-    for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
+    for (let k = 0; k < 10; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
             let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
             actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)

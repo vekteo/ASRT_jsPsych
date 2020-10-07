@@ -237,8 +237,8 @@ let actualRandom;
 
 /* practice blocks*/
 
-for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 practice blocks
-    actualRandom = firstStimulusProc(j,1) //before first element, longer delay
+for (let j = 1; j < 4; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 practice blocks
+    actualRandom = firstStimulusProcPractice(j,1) //before first element, longer delay
     timeline.push(actualRandom);
     insertRepetition(randomRepeat(actualRandom));
     for (let l = 2; l < 5; l++) { //now 4 practice element in one block

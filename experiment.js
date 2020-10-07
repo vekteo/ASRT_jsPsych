@@ -258,6 +258,7 @@ for (let j = 1; j < 4; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 pr
         insertRepetition(randomRepeat(actualRandom));
     }
     timeline.push(feedback);
+    timeline.push(blockStart);
 }
 timeline.push(startInstruction);
 

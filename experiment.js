@@ -84,6 +84,11 @@ const feedback = {
     }
 }
 
+const blockStart = {
+    type: "html-keyboard-response",
+    stimulus: "<p>Press any key to start the next block!</p>"
+};
+
 const images = ["static/images/memo_logo.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*FUNCTIONS*/
@@ -283,6 +288,11 @@ for (let j = 1; j < 4; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     /*show feedback after the end of the block*/
 
     timeline.push(feedback);
+
+    /*do not show blockStart event after the last block*/
+    if (j!==20){
+        timeline.push(blockStart);
+    }
 }
 
 timeline.push(end)

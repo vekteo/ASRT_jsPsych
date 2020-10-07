@@ -210,7 +210,7 @@ let firstTrialProperties = {
     grid: [[1, 1, 1, 1]],
     choices: responseKeys,
     target: jsPsych.timelineVariable('stimulus'),
-    pre_target_duration: 200,
+    pre_target_duration: 1000,
     target_color: "url(static/images/dalmata.jpg)", //set image for random trials
     data: jsPsych.timelineVariable('data'),
     response_ends_trial: true,

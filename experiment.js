@@ -34,7 +34,7 @@ const instruction = {
     show_clickable_nav: true
 }
 
-const startPracticeInstruction = { //define instruction at the staert of the practice
+const startPracticeInstruction = { //define instruction at the start of the practice
     type: "html-keyboard-response",
     stimulus: "<p>If you are ready, press <strong>ANY</strong> key to start a practice!</p>"
 };

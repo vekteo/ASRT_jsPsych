@@ -22,6 +22,7 @@ The breaks between the blocks are <strong>self-paced</strong>. The user can cont
 After the end of the task, output data are downloaded to the local machine (CSV format).
 
 <strong>Output variables</strong>:
+
 - <strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)
 - <strong>trial_type:</strong> JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
 - <strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)

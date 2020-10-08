@@ -22,29 +22,30 @@ The breaks between the blocks are <strong>self-paced</strong>. The user can cont
 After the end of the task, output data are downloaded to the local machine (CSV format).
 
 <strong>Output variables</strong>:
-- success: whether fullscreen mode was successfully started/ended (true or false)
-- trial_type: JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
-- trial_index: the number of the given trials (all events considered, even instructions, feedbacks!)
-- time_elapsed: the time elapsed from the start of the script in ms
-- internal_code_id: internal node id of the trial
-- subject: randomly generated 15-character-long subject ID
-- browserEvent: browser events at the given trial (fullscreenenter, fullscreenexit, blur or focus)
-- view_history: only relavant at the instructions; the actions and the corresponding RTs during the reading of the instructions
-- rt: reaction time (RT) in ms - in the case of first responses to the trial, it shows the rt calculated from the appearance of the stimulus; in the case of not first responses, it shows the rt calculated from the last button press
-- stimulus: stimulus on the screen; relevant only if instructions/feedback are present
-- key_press: number code of the key pressed
-- correct: whether the response was correct (true or false)
-- grid: layout of the positions (in a grid)
-- target: position of target stimulus (the 4 positions: 1: 0,0; 2: 0,1; 3: 0,2; 4: 0,3)
-- trialType: random or pattern stimulus (R or P)
-- block: number of the block (1-20)
-- firstResponse: if the answer is the first answer to the given trial (yes: 1; no: 0)
-- trialNumber: number of the trial within the block (1-85)
-- sequence: the sequence used during the task (assigned randomly at the beginning)
-- isPractice: whether it was a practice trial (yes: 1; 0: no)
-- correctPos: the position of the target stimulus (1-4)
-- correctRespButton: the response that should be pressed to respond correctly ('s', 'f', 'j' or 'l')
-- respButton: the pressed response key ('s', 'f', 'j' or 'l')
-- cumulativeRT: the RT from the beginning of the first appeareance of the trial in ms
-- actualTriplet: the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)
-- tripletType: the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T) 
+
+- <strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)
+- <strong>trial_type:</strong> JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
+- <strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)
+- <strong>time_elapsed:</strong> the time elapsed from the start of the script in ms
+- <strong>internal_code_id:</strong> internal node id of the trial
+- <strong>subject:</strong> randomly generated 15-character-long subject ID
+- <strong>browserEvent:</strong> browser events at the given trial (fullscreenenter, fullscreenexit, blur or focus)
+- <strong>view_history:</strong> only relavant at the instructions; the actions and the corresponding RTs during the reading of the instructions
+- <strong>rt:</strong> reaction time (RT) in ms - in the case of first responses to the trial, it shows the rt calculated from the appearance of the stimulus; in the case of not first responses, it shows the rt calculated from the last button press
+- <strong>stimulus:</strong> stimulus on the screen; relevant only if instructions/feedback are present
+- <strong>key_press:</strong> number code of the key pressed
+- <strong>correct:</strong> whether the response was correct (true or false)
+- <strong>grid:</strong> layout of the positions (in a grid)
+- <strong>target:</strong> position of target stimulus (the 4 positions: 1: 0,0; 2: 0,1; 3: 0,2; 4: 0,3)
+- <strong>trialType:</strong> random or pattern stimulus (R or P)
+- <strong>block:</strong> number of the block (1-20)
+- <strong>firstResponse:</strong> if the answer is the first answer to the given trial (yes: 1; no: 0)
+- <strong>trialNumber:</strong> number of the trial within the block (1-85)
+- <strong>sequence:</strong> the sequence used during the task (assigned randomly at the beginning)
+- <strong>isPractice:</strong> whether it was a practice trial (yes: 1; 0: no)
+- <strong>correctPos:</strong> the position of the target stimulus (1-4)
+- <strong>correctRespButton:</strong> the response that should be pressed to respond correctly ('s', 'f', 'j' or 'l')
+- <strong>respButton:</strong> the pressed response key ('s', 'f', 'j' or 'l')
+- <strong>cumulativeRT:</strong> the RT from the beginning of the first appeareance of the trial in ms
+- <strong>actualTriplet:</strong> the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)
+- <strong>tripletType:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T) 

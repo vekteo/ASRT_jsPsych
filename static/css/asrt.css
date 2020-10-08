@@ -1,5 +1,5 @@
 p{
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .message{
@@ -7,10 +7,18 @@ p{
 }
 
 .continue{
-    padding-top: 100px;
+    margin-top: 150px;
 }
 
 .alert{
     padding-top: 100px;
     color: red;
+}
+
+h2{
+    margin-bottom: 100px;
+}
+
+h1{
+    margin-bottom: 100px;
 }

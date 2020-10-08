@@ -1,33 +1,48 @@
-/*VARIABLES*/
+/*Created by Teodora Vekony (vekteo@gmail.com)
+Lyon Neuroscience Research Center
+Universite Claude Bernard Lyon 1
+
+Supervised and optimized by Szonja Weigl
+Lyon Neuroscience Research Center
+Universite Claude Bernard Lyon 1
+
+Github:https://github.com/vekteo/ASRT_JSPsych
+*/
+
+
+/*************** VARIABLES ***************/
 
 let timeline = []; //create timeline
-const welcome = { //create welcome message trial
+const instruction = {
+    type: "instructions",
+    pages: [
+        "<h1>Welcome to the experiment!</h1>" +
+        "</p> Click on <strong>Next</strong> to continue.</p>" +
+        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>",
+        "<p>In this experiment, you will see four circles on the screen. From left to right, the <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> keys correspond to the four circles.</p>" +
+        "<div class='float: center;'><img src='static/images/circles.png' height='156px' width='346px' alt='Circles'/></div>" +
+        "<p>An <b>image of a dog</b> will appear in one of the circles.</p>" +
+        "<div class='float: center;'><img src='static/images/dalmata.jpg' height='100px' width='100px' alt='Dalmata'/></div>" +
+        "<p>Your task will be to press the key corresponding to the position of the dog <strong>as quickly and as accurately as you can</strong>.",
+        "<p>Your will need to press the <strong>'S'</strong> key with the middle finger of your left hand," +
+        "<p>the <strong>'F'</strong> key with the index finger of your left hand</strong>" +
+        "<p>the <strong>'J'</strong> key with the index finger of your right hand," +
+        "<p>the <strong>'L'</strong> key with the middle finger of your right hand</strong>" +
+        "<div class='float: center;'><img src='static/images/hand.jpg' height='300px' width='500px' alt='Hand'/></div>" +
+        "<p>If the instructions are clear, click on <strong>Next</strong>; if not, you can go back and check the instructions again by clinking on <strong>Previous</strong>.</p>"
+    ],
+    show_clickable_nav: true
+}
+
+const startPracticeInstruction = { //define instruction at the start of the practice
     type: "html-keyboard-response",
-    stimulus: "<h1>Welcome to the experiment!</h1>" +
-        "</p> Press any key to begin.</p>" +
-        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>"
-};
-const instructions1 = { //define instruction trial 1
-    type: "html-keyboard-response",
-    stimulus: "<p>In this experiment, you will see four circles on the screen.</p>" +
-        "<p>An <b>image of a cat</b> will appear in one of the circles.</p>" +
-        "<p>Your task will be to press the button corresponding to the position of the cat.</p>" +
-        "<p>Press any key to continue!</p>"
-};
-const instructions2 = { //define instruction trial 2
-    type: "html-keyboard-response",
-    stimulus: "<p class = 'buttons'>If the cat is in the first position, press the <strong>'S'</strong> button!</p>" +
-        "<p>If the cat is in the second position, press the <strong>'D'</strong> button!</p>" +
-        "<p>If the cat is in the third position, press the <strong>'J'</strong> button!</p>" +
-        "<p>If the cat is in the fourth position, press the <strong>'K'</strong> button!</p>" +
-        "<p class = 'alert'><strong>Try to be as fast and as accurate as possible!</strong></p>" +
-        "<p>If you are ready, press ANY key to start a practice!</p>"
+    stimulus: "<p>If you are ready, press <strong>ANY</strong> key to start a practice!</p>"
 };
 
-const instructions3 = { //define instruction trial 3
+const startInstruction = { //define instruction at the start of the experiment
     type: "html-keyboard-response",
     stimulus: "<p>The real task begins now.</p>" +
-        "<p>If you are ready, press ANY key to start the task!</p>"
+        "<p>If you are ready, press <strong>ANY</strong> key to start the task!</p>"
 };
 
 const end = { //define end of experiment message
@@ -36,12 +51,37 @@ const end = { //define end of experiment message
         "<p>Thank you for participating!</p>"
 };
 
-const subject_id = Math.floor(Math.random() * 100000) //generate a random subject number
-const usedSequence = shuffleSequence([0, 1, 2, 3]) //the 4 possible positions of the sequence (function shuffles them)
-const responseKeys = [['s', 'd', 'j', 'k']]; //response keys settings
-const usedSequencePos = usedSequence.map(v=> v+1) //the sequence positions from 1-4
-const usedSequenceString = usedSequencePos.join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
+const subject_id = jsPsych.randomization.randomID(15); //generate a random subject ID
+const usedSequence = jsPsych.randomization.shuffle([0,1,2,3]) //the 4 possible positions of the sequence (function shuffles them)
+const responseKeys = [['s', 'f', 'j', 'l']]; //response keys settings
+const usedSequenceString = usedSequence.map(v=> v+1).join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
 let actualTriplet;
+let actualRandom;
+const numberOfPracticeBlocks = 3;
+const numberOfBlocks = 20;
+const numberOfBlockElements = 85;
+const numberOfSequenceRepetitions = 10;
+const patternTrialImage = "url(static/images/dalmata.jpg)";
+const randomTrialImage = "url(static/images/dalmata.jpg)";
+const rsi = 120;
+const initialDelay = 1000;
+
+/* set up trial properties */
+
+const trialProperties = {
+    type: "serial-reaction-time",
+    grid: [[1, 1, 1, 1]],
+    choices: responseKeys,
+    target: jsPsych.timelineVariable('stimulus'),
+    data: jsPsych.timelineVariable('data'),
+    response_ends_trial: true,
+}
+
+const patternTrialProperties = {... trialProperties, pre_target_duration: rsi, target_color: patternTrialImage};
+const patternIncorrectTrialProperties = {... trialProperties, pre_target_duration: 0, target_color: patternTrialImage};
+const randomTrialProperties = {... trialProperties, pre_target_duration: rsi, target_color: randomTrialImage};
+const randomIncorrectTrialProperties = {... trialProperties, pre_target_duration: 0, target_color: randomTrialImage};
+const firstTrialProperties = {... trialProperties, pre_target_duration: initialDelay, target_color: randomTrialImage};
 
 /* define feedback message - based on only the first button press for the given stimulus */
 
@@ -55,9 +95,9 @@ const feedback = {
         let accuracy = Math.round(correct_trials.count() / numberOfTrials * 100); //mean accuracy in the given block
         let rt = Math.round(correct_trials.select('rt').mean()); //mean rt of the given block
         let message;
-        if (accuracy < 92) { //if mean accuracy is less than 92, show this message
+        if (accuracy < 90) { //if mean accuracy is less than 90, show this message
             message = "<p class='message'><strong>Try to be more accurate!</strong></p>"
-        } else if (rt > 500) { //if mean rt is higher than 500, show this message
+        } else if (accuracy >= 93 && rt > 200) { //if mean rt is higher than 200 ms, and accuracy than 92%, show this message
             message = "<p class='message'><strong>Try to be faster!</strong></p>"
         } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
             message = "<p class='message'><strong>Please continue!</strong></p>"
@@ -69,21 +109,14 @@ const feedback = {
     }
 }
 
-const images = ['static/images/memo_logo.jpg']; //preload memo logo (stimuli images are preloaded automatically)
+const blockStart = {
+    type: "html-keyboard-response",
+    stimulus: "<p>Press any key to start the next block!</p>"
+};
 
-/*FUNCTIONS*/
+const images = ["static/images/memo_logo.jpg", "static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
-/* function for shuffling the sequence positions */
-
-function shuffleSequence(sequence) {
-    for (var i = sequence.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = sequence[i];
-        sequence[i] = sequence[j];
-        sequence[j] = temp;
-    }
-    return sequence
-}
+/*************** FUNCTIONS ***************/
 
 /*function for incorrect pattern trial procedures*/
 
@@ -102,7 +135,29 @@ function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [random],
+        timeline: [randomTrialProperties],
+        timeline_variables: randomStimulus
+    }
+}
+
+/*function for first stimulus generation in the practice session*/
+
+function firstStimulusProcPractice(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [firstTrialProperties],
+        timeline_variables: randomStimulus
+    }
+}
+
+/*function for first stimulus generation*/
+
+function firstStimulusProc(block, trialNumber) {
+    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
+    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
+    return {
+        timeline: [firstTrialProperties],
         timeline_variables: randomStimulus
     }
 }
@@ -113,16 +168,17 @@ function randomStimulusProcPractice(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [random],
+        timeline: [randomTrialProperties],
         timeline_variables: randomStimulus
     }
 }
+
 
 /*function for inserting the same random element after incorrect response*/
 
 function randomRepeat(actualRandom) {
     return {
-        timeline: [randomIncorrect],
+        timeline: [randomIncorrectTrialProperties],
         timeline_variables: actualRandom.timeline_variables,
         conditional_function: function () { //function only happens is response is not correct!
             let data = jsPsych.data.get().last(1).values()[0];
@@ -141,93 +197,47 @@ function insertRepetition(element) {
 
 /////////////////////////////////////////
 
-/*TIMELINE*/
+/*************** TIMELINE ***************/
 
-timeline.push(welcome);
-timeline.push(instructions1);
-timeline.push(instructions2);
+timeline.push({type: "fullscreen", fullscreen_mode: true});
+timeline.push(instruction);
+timeline.push(startPracticeInstruction)
 jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
-
-/*set properties of pattern trials*/
-
-let patternTrialProperties = {
-    type: "serial-reaction-time",
-    grid: [[1, 1, 1, 1]],
-    choices: responseKeys,
-    target: jsPsych.timelineVariable('stimulus'),
-    pre_target_duration: 120, //RSI in ms
-    target_color: "url(static/images/cat.jpg)", //set image for pattern trials
-    data: jsPsych.timelineVariable('data'),
-    response_ends_trial: true,
-}
-
-let patternIncorrectTrialProperties = {
-    type: "serial-reaction-time",
-    grid: [[1, 1, 1, 1]],
-    choices: responseKeys,
-    target: jsPsych.timelineVariable('stimulus'),
-    pre_target_duration: 0, //RSI set to 0 after incorrect response
-    target_color: "url(static/images/cat.jpg)", //set image for pattern trials
-    data: jsPsych.timelineVariable('data'),
-    response_ends_trial: true, //the default target_color, i.e. the "target stimulus" is set in the source code
-}
-
-/*set properties of random trials*/
-
-let randomTrialProperties = {
-    type: "serial-reaction-time",
-    grid: [[1, 1, 1, 1]],
-    choices: responseKeys,
-    target: jsPsych.timelineVariable('stimulus'),
-    pre_target_duration: 120,
-    target_color: "url(static/images/cat2.jpg)", //set image for random trials
-    data: jsPsych.timelineVariable('data'),
-    response_ends_trial: true,
-};
-
-let randomIncorrectTrialProperties = {
-    type: "serial-reaction-time",
-    grid: [[1, 1, 1, 1]],
-    choices: responseKeys,
-    target: jsPsych.timelineVariable('stimulus'),
-    pre_target_duration: 0,
-    target_color: "url(static/images/cat2.jpg)", //set image for random trials
-    data: jsPsych.timelineVariable('data'),
-    response_ends_trial: true,
-};
-
-let random = randomTrialProperties
-let randomIncorrect = randomIncorrectTrialProperties
-
-/*set up blocks*/
-
-let actualRandom;
 
 /* practice blocks*/
 
-for (let j = 1; j < 3; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE
-    for (let l = 1; l < 5; l++) {
+for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
+    actualRandom = firstStimulusProcPractice(j,1) //longer delay before first element
+    timeline.push(actualRandom);
+    insertRepetition(randomRepeat(actualRandom));
+    for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
         actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
     timeline.push(feedback);
+    timeline.push(blockStart);
 }
-timeline.push(instructions3);
+timeline.push(startInstruction);
 
-/* set up pattern protocols */
+/* sequence protocol */
 
-for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
+for (let j = 1; j < numberOfBlocks+1; j++) {
 
     /* first five random stimuli at the beginning of the block*/
-    for (let l = 1; l < 6; l++) {
+
+    actualRandom = firstStimulusProc(j,1) //before first element, longer delay
+    timeline.push(actualRandom);
+    insertRepetition(randomRepeat(actualRandom));
+    for (let l = 2; l < 6; l++) {
         actualRandom = randomStimulusProc(j,l)
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
 
     /*create all remaining block elements*/
-    for (let k = 0; k < 2; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
+   
+    for (let k = 0; k < numberOfSequenceRepetitions; k++) { //repeat 8-elements sequence 10 times
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
             let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
             actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)
@@ -248,13 +258,20 @@ for (let j = 1; j < 3; j++) { //2 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER O
     }
 
     /*show feedback after the end of the block*/
-
+    
     timeline.push(feedback);
+
+    /*do not show blockStart event after the last block*/
+    
+    if (j!==numberOfBlocks){
+        timeline.push(blockStart);
+    }
 }
 
 timeline.push(end)
+timeline.push({type: "fullscreen", fullscreen_mode: false});
 
-/*start the experiment*/
+/*************** EXPERIMENT START AND DATA UPDATE ***************/
 
 jsPsych.init({
     timeline: timeline,
@@ -283,7 +300,7 @@ jsPsych.init({
 
     /*calculate triplet types*/
 
-        var areTrialsCorrect = jsPsych.data.get().select('correct').values;
+        var areTrialsCorrect = jsPsych.data.get().select("correct").values;
         let lengthOfTrials = areTrialsCorrect.length
         let isCurrentCorrect = lastTrial.correct
 
@@ -324,20 +341,20 @@ jsPsych.init({
         else {
             lastTrial.tripletType = "L" //low-probability triplet
         }
+
     }
         /*add browser events in JSON format*/
+      
         let interactionData = jsPsych.data.getInteractionData()
         const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
         if (interactionDataOfLastTrial) {
             lastTrial.browserEvents = JSON.stringify(interactionDataOfLastTrial)
-        }
-    }
-    ,
-    on_finish: function () {
-        jsPsych.data.displayData(); //display data at the end
-        const interactionData = jsPsych.data.getInteractionData();
-        console.log(interactionData.json()); //prints out the interaction events
-        console.log(jsPsych.data.get().csv()); //prints out experiment output
-        jsPsych.data.get().localSave('csv', 'output.csv'); //saves experiment output to .csv file
+
+         }
+     },
+ 
+     on_finish: function () {
+        jsPsych.data.get().localSave("csv", "output.csv"); //saves experiment output to .csv file
+       
     }
 })

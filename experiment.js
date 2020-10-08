@@ -109,7 +109,7 @@ function randomStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [random],
+        timeline: [randomTrialProperties],
         timeline_variables: randomStimulus
     }
 }
@@ -120,7 +120,7 @@ function firstStimulusProcPractice(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [firstTrial],
+        timeline: [firstTrialProperties],
         timeline_variables: randomStimulus
     }
 }
@@ -131,7 +131,7 @@ function firstStimulusProc(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [firstTrial],
+        timeline: [firstTrialProperties],
         timeline_variables: randomStimulus
     }
 }
@@ -142,7 +142,7 @@ function randomStimulusProcPractice(block, trialNumber) {
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
     let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [random],
+        timeline: [randomTrialProperties],
         timeline_variables: randomStimulus
     }
 }
@@ -152,7 +152,7 @@ function randomStimulusProcPractice(block, trialNumber) {
 
 function randomRepeat(actualRandom) {
     return {
-        timeline: [randomIncorrect],
+        timeline: [randomIncorrectTrialProperties],
         timeline_variables: actualRandom.timeline_variables,
         conditional_function: function () { //function only happens is response is not correct!
             let data = jsPsych.data.get().last(1).values()[0];

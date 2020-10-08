@@ -10,7 +10,7 @@ Github:https://github.com/vekteo/ASRT_JSPsych
 */
 
 
-/*VARIABLES*/
+/*************** VARIABLES ***************/
 
 let timeline = []; //create timeline
 const instruction = {
@@ -116,7 +116,7 @@ const blockStart = {
 
 const images = ["static/images/memo_logo.jpg", "static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
-/*FUNCTIONS*/
+/*************** FUNCTIONS ***************/
 
 /*function for incorrect pattern trial procedures*/
 
@@ -197,7 +197,7 @@ function insertRepetition(element) {
 
 /////////////////////////////////////////
 
-/*TIMELINE*/
+/*************** TIMELINE ***************/
 
 timeline.push({type: "fullscreen", fullscreen_mode: true});
 timeline.push(instruction);
@@ -220,11 +220,12 @@ for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
 }
 timeline.push(startInstruction);
 
-/* set up pattern protocols */
+/* sequence protocol */
 
 for (let j = 1; j < numberOfBlocks+1; j++) {
 
     /* first five random stimuli at the beginning of the block*/
+
     actualRandom = firstStimulusProc(j,1) //before first element, longer delay
     timeline.push(actualRandom);
     insertRepetition(randomRepeat(actualRandom));
@@ -257,6 +258,7 @@ for (let j = 1; j < numberOfBlocks+1; j++) {
     }
 
     /*show feedback after the end of the block*/
+    
     timeline.push(feedback);
 
     /*do not show blockStart event after the last block*/
@@ -267,10 +269,9 @@ for (let j = 1; j < numberOfBlocks+1; j++) {
 }
 
 timeline.push(end)
-
 timeline.push({type: "fullscreen", fullscreen_mode: false});
 
-/*start the experiment*/
+/*************** EXPERIMENT START AND DATA UPDATE ***************/
 
 jsPsych.init({
     timeline: timeline,
@@ -343,15 +344,15 @@ jsPsych.init({
 
     }
         /*add browser events in JSON format*/
+
         let interactionData = jsPsych.data.getInteractionData()
         const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
         if (interactionDataOfLastTrial) {
             lastTrial.browserEvents = JSON.stringify(interactionDataOfLastTrial)
+         }
+     },
  
-        }
- 
-    },
-    on_finish: function () {
+     on_finish: function () {
         jsPsych.data.get().localSave("csv", "output.csv"); //saves experiment output to .csv file
     }
 })

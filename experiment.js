@@ -56,6 +56,32 @@ const usedSequence = jsPsych.randomization.shuffle([0,1,2,3]) //the 4 possible p
 const responseKeys = [['s', 'f', 'j', 'l']]; //response keys settings
 const usedSequenceString = usedSequence.map(v=> v+1).join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
 let actualTriplet;
+let actualRandom;
+const numberOfPracticeBlocks = 3;
+const numberOfBlocks = 20;
+const numberOfBlockElements = 85;
+const numberOfSequenceRepetitions = 10;
+const patternTrialImage = "url(static/images/dalmata.jpg)";
+const randomTrialImage = "url(static/images/dalmata.jpg)";
+const rsi = 120;
+const initialDelay = 1000;
+
+/* set up trial properties */
+
+const trialProperties = {
+    type: "serial-reaction-time",
+    grid: [[1, 1, 1, 1]],
+    choices: responseKeys,
+    target: jsPsych.timelineVariable('stimulus'),
+    data: jsPsych.timelineVariable('data'),
+    response_ends_trial: true,
+}
+
+const patternTrialProperties = {... trialProperties, pre_target_duration: rsi, target_color: patternTrialImage};
+const patternIncorrectTrialProperties = {... trialProperties, pre_target_duration: 0, target_color: patternTrialImage};
+const randomTrialProperties = {... trialProperties, pre_target_duration: rsi, target_color: randomTrialImage};
+const randomIncorrectTrialProperties = {... trialProperties, pre_target_duration: 0, target_color: randomTrialImage};
+const firstTrialProperties = {... trialProperties, pre_target_duration: initialDelay, target_color: randomTrialImage};
 
 /* define feedback message - based on only the first button press for the given stimulus */
 

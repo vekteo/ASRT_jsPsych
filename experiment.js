@@ -273,11 +273,11 @@ let actualRandom;
 
 /* practice blocks*/
 
-for (let j = 1; j < 4; j++) { //SET UP NUMBER OF PRACTICE BLOCKS HERE - now 2 practice blocks
-    actualRandom = firstStimulusProcPractice(j,1) //before first element, longer delay
+for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
+    actualRandom = firstStimulusProcPractice(j,1) //longer delay before first element
     timeline.push(actualRandom);
     insertRepetition(randomRepeat(actualRandom));
-    for (let l = 2; l < 86; l++) { //now 85 practice element in one block
+    for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
         actualRandom = randomStimulusProcPractice(j,l);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
@@ -289,7 +289,7 @@ timeline.push(startInstruction);
 
 /* set up pattern protocols */
 
-for (let j = 1; j < 21; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER OF BLOCKS
+for (let j = 1; j < numberOfBlocks+1; j++) {
 
     /* first five random stimuli at the beginning of the block*/
     actualRandom = firstStimulusProc(j,1) //before first element, longer delay
@@ -302,7 +302,8 @@ for (let j = 1; j < 21; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER 
     }
 
     /*create all remaining block elements*/
-    for (let k = 0; k < 10; k++) { //repeat 8-elements sequence 2 times //MODIFY HERE FOR CHANGE IN THE ELEMENTS IN BLOCKS
+   
+    for (let k = 0; k < numberOfSequenceRepetitions; k++) { //repeat 8-elements sequence 10 times
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
             let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
             actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)
@@ -326,7 +327,8 @@ for (let j = 1; j < 21; j++) { //3 blocks: MODIFY HERE FOR CHANGE IN THE NUMBER 
     timeline.push(feedback);
 
     /*do not show blockStart event after the last block*/
-    if (j!==20){
+    
+    if (j!==numberOfBlocks){
         timeline.push(blockStart);
     }
 }

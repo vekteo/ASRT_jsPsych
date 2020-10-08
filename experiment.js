@@ -54,8 +54,7 @@ const end = { //define end of experiment message
 const subject_id = jsPsych.randomization.randomID(15); //generate a random subject ID
 const usedSequence = jsPsych.randomization.shuffle([0,1,2,3]) //the 4 possible positions of the sequence (function shuffles them)
 const responseKeys = [['s', 'f', 'j', 'l']]; //response keys settings
-const usedSequencePos = usedSequence.map(v=> v+1) //the sequence positions from 1-4
-const usedSequenceString = usedSequencePos.join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
+const usedSequenceString = usedSequence.map(v=> v+1).join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
 let actualTriplet;
 
 /* define feedback message - based on only the first button press for the given stimulus */

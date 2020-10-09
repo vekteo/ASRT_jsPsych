@@ -114,7 +114,7 @@ const blockStart = {
     stimulus: "<p>Press any key to start the next block!</p>"
 };
 
-const images = ["static/images/memo_logo.jpg", "static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
+const images = ["static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*************** FUNCTIONS ***************/
 

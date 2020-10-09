@@ -18,8 +18,7 @@ const instruction = {
     type: "instructions",
     pages: [
         "<h1>Welcome to the experiment!</h1>" +
-        "</p> Click on <strong>Next</strong> to continue.</p>" +
-        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>",
+        "</p> Click on <strong>Next</strong> to continue.</p>",
         "<p>In this experiment, you will see four circles on the screen. From left to right, the <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> keys correspond to the four circles.</p>" +
         "<div class='float: center;'><img src='static/images/circles.png' height='156px' width='346px' alt='Circles'/></div>" +
         "<p>An <b>image of a dog</b> will appear in one of the circles.</p>" +

@@ -22,6 +22,7 @@ The breaks between the blocks are <strong>self-paced</strong>. The user can cont
 After the end of the task, output data are downloaded to the local machine (CSV format).
 
 <strong>Output variables</strong>:
+
 - <strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)
 - <strong>trial_type:</strong> JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
 - <strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)
@@ -47,6 +48,7 @@ After the end of the task, output data are downloaded to the local machine (CSV 
 - <strong>respButton:</strong> the pressed response key ('s', 'f', 'j' or 'l')
 - <strong>cumulativeRT:</strong> the RT from the beginning of the first appeareance of the trial in ms
 - <strong>actualTriplet:</strong> the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)
+
 - <strong>tripletType:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T)
 
 <strong>Browser requirements</strong>: Any browser except Safari and Internet Explorer.

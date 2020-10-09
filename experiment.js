@@ -1,4 +1,5 @@
-/*Created by Teodora Vekony (vekteo@gmail.com)
+/* 
+Created by Teodora Vekony (vekteo@gmail.com)
 Lyon Neuroscience Research Center
 Universite Claude Bernard Lyon 1
 
@@ -17,8 +18,7 @@ const instruction = {
     type: "instructions",
     pages: [
         "<h1>Welcome to the experiment!</h1>" +
-        "</p> Click on <strong>Next</strong> to continue.</p>" +
-        "<div class='float: center;'><img src='static/images/memo_logo.jpg' height='100' width='120' alt='Team Logo'/></div>",
+        "</p> Click on <strong>Next</strong> to continue.</p>",
         "<p>In this experiment, you will see four circles on the screen. From left to right, the <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> keys correspond to the four circles.</p>" +
         "<div class='float: center;'><img src='static/images/circles.png' height='156px' width='346px' alt='Circles'/></div>" +
         "<p>An <b>image of a dog</b> will appear in one of the circles.</p>" +
@@ -114,7 +114,7 @@ const blockStart = {
     stimulus: "<p>Press any key to start the next block!</p>"
 };
 
-const images = ["static/images/memo_logo.jpg", "static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
+const images = ["static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*************** FUNCTIONS ***************/
 

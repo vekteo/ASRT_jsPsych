@@ -1,5 +1,5 @@
 # ASRT_JSPsych
-A simple <strong>Alternating Serial Reaction Time (ASRT)</strong> task.
+A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.
 
 It choses randomly an 8-element sequence, and assigns a random subject ID.
 
@@ -48,4 +48,7 @@ After the end of the task, output data are downloaded to the local machine (CSV 
 - <strong>respButton:</strong> the pressed response key ('s', 'f', 'j' or 'l')
 - <strong>cumulativeRT:</strong> the RT from the beginning of the first appeareance of the trial in ms
 - <strong>actualTriplet:</strong> the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)
-- <strong>tripletType:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T) 
+
+- <strong>tripletType:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T)
+
+<strong>Browser requirements</strong>: Any browser except Safari and Internet Explorer.

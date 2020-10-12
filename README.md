@@ -1,9 +1,9 @@
 # ASRT_JSPsych
-A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.
+A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task (<a href="https://link.springer.com/article/10.1007%2Fs00221-009-2024-x">Nemeth et al., 2010</a>) created with the JSPSych library (<a href="https://link.springer.com/article/10.3758/s13428-014-0458-y">de Leeuw, J. R., 2015</a>).
 
-It choses randomly an 8-element sequence, and assigns a random subject ID.
+The program choses an ASRT sequence randomly, and assigns a random subject ID.
 
-The script begins with instructions, and within that, the participants are allowed to navigate.
+The program begins with instructions, and within that, the participants are allowed to navigate.
 
 It begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element-long sequence.
 

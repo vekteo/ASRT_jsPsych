@@ -5,7 +5,7 @@ The program choses an ASRT sequence randomly, and assigns a random subject ID.
 
 The program begins with instructions, and within that, the participants are allowed to navigate.
 
-It begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element-long sequence.
+The task begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element-long sequence.
 
 The trials are images of dogs. The <strong>'s', 'f', 'j' and 'l'</strong> buttons are set as response buttons.
 

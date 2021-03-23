@@ -120,45 +120,30 @@ function IncorrectTrialProcs(timeline, timelineVariables) {
 
 /*function for random stimulus generation*/
 
-function randomStimulusProc(block, trialNumber) {
+function randomStimulusProc(block, trialNumber, isFirstTrial, isPractice) {
+    let stimuli;
+    let trialProp;
     let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
-    return {
-        timeline: [randomTrialProperties],
-        timeline_variables: randomStimulus
+    stimuli = [{stimulus: [0, newRandom], data: {p_or_r: "R", block: block, first_response: 1,  trial_number: trialNumber, sequence: usedSequenceString}}] //jsPsych.init modifies if necessary
+    if (isFirstTrial == 1 && isPractice == 1) {
+        stimuli[0].data.is_practice = 1;
+        trialProp = firstTrialProperties;
     }
-}
-
-/*function for first stimulus generation in the practice session*/
-
-function firstStimulusProcPractice(block, trialNumber) {
-    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
-    return {
-        timeline: [firstTrialProperties],
-        timeline_variables: randomStimulus
+    if (isPractice == 1) {
+        stimuli[0].data.is_practice = 1;
+        trialProp = randomTrialProperties
+    } 
+    else if (isFirstTrial == 1){
+        stimuli[0].data.is_practice = 0;
+        trialProp = firstTrialProperties
     }
-}
-
-/*function for first stimulus generation*/
-
-function firstStimulusProc(block, trialNumber) {
-    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 0}}] //jsPsych.init modifies if necessary
-    return {
-        timeline: [firstTrialProperties],
-        timeline_variables: randomStimulus
+    else {
+        stimuli[0].data.is_practice = 0;
+        trialProp = randomTrialProperties
     }
-}
-
-/*function for random stimulus generation in the practice session*/
-
-function randomStimulusProcPractice(block, trialNumber) {
-    let newRandom = Math.floor(Math.random() * 4); //choose a random position between 1-4
-    let randomStimulus = [{stimulus: [0, newRandom], data: {trialType: "R", block: block, firstResponse: 1,  trialNumber: trialNumber, sequence: usedSequenceString, isPractice: 1}}] //jsPsych.init modifies if necessary
     return {
-        timeline: [randomTrialProperties],
-        timeline_variables: randomStimulus
+        timeline: [trialProp],
+        timeline_variables: stimuli
     }
 }
 

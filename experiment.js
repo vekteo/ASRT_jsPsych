@@ -103,7 +103,7 @@ const blockStart = {
     stimulus: `<p>${language.task.nextBlock}</p>`
 };
 
-const images = ["static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
+const images = ["static/images/ASRT_en.gif", "static/images/ASRT_hu.gif", "static/images/keyboard.bmp", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*************** FUNCTIONS ***************/
 

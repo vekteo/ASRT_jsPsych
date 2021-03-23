@@ -56,14 +56,6 @@ const responseKeys = [['s', 'f', 'j', 'l']]; //response keys settings
 const usedSequenceString = usedSequence.map(v=> v+1).join().replace(/,/g, ""); //the sequence positions from 1-4 converted to string
 let actualTriplet;
 let actualRandom;
-const numberOfPracticeBlocks = 3;
-const numberOfBlocks = 20;
-const numberOfBlockElements = 85;
-const numberOfSequenceRepetitions = 10;
-const patternTrialImage = "url(static/images/dalmata.jpg)";
-const randomTrialImage = "url(static/images/dalmata.jpg)";
-const rsi = 120;
-const initialDelay = 1000;
 
 /* set up trial properties */
 

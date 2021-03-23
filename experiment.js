@@ -181,11 +181,11 @@ jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 /* practice blocks*/
 
 for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
-    actualRandom = firstStimulusProcPractice(j,1) //longer delay before first element
+    actualRandom = randomStimulusProc(j,1,1,1) //longer delay before first element
     timeline.push(actualRandom);
     insertRepetition(randomRepeat(actualRandom));
     for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
-        actualRandom = randomStimulusProcPractice(j,l);
+        actualRandom = randomStimulusProc(j,l,0,1);
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
@@ -200,23 +200,25 @@ for (let j = 1; j < numberOfBlocks+1; j++) {
 
     /* first five random stimuli at the beginning of the block*/
 
-    actualRandom = firstStimulusProc(j,1) //before first element, longer delay
+    actualRandom = randomStimulusProc(j,1,1,0) //before first element, longer delay
     timeline.push(actualRandom);
     insertRepetition(randomRepeat(actualRandom));
     for (let l = 2; l < 6; l++) {
-        actualRandom = randomStimulusProc(j,l)
+        actualRandom = randomStimulusProc(j,l,0,0)
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
     }
 
     /*create all remaining block elements*/
-   
+  
     for (let k = 0; k < numberOfSequenceRepetitions; k++) { //repeat 8-elements sequence 10 times
         for (let n = 0; n < 4; n++) { //repeat pattern + repeat random
-            let dataForPattern = {trialType: "P", block: j, firstResponse: 1, trialNumber: n+n+7+(k*8), sequence: usedSequenceString, isPractice: 0} //output parameters for pattern stimuli
-            actualRandom = randomStimulusProc(j,n+n+6+(k*8),0)
+
+            actualRandom = randomStimulusProc(j,n+n+6+(k*8), 0, 0)
             timeline.push(actualRandom);
             insertRepetition(randomRepeat(actualRandom));
+
+            let dataForPattern = {p_or_r: "P", block: j, first_response: 1, trial_number: n+n+7+(k*8), sequence: usedSequenceString, is_practice: 0} //output parameters for pattern stimuli
             let patternTrialProc = {
                 timeline: [patternTrialProperties],
                 timeline_variables: [{stimulus: [0, usedSequence[n]], data: dataForPattern}]

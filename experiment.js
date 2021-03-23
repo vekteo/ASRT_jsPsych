@@ -82,8 +82,8 @@ const feedback = {
     stimulus: function () {
         let trials = jsPsych.data.get();
         let blockNum = jsPsych.data.get().last(1).values()[0].block; //relies only on the performance in the last block
-        let correct_trials = trials.filter({correct: true, block: blockNum, firstResponse: 1}); //only: correct response, last block, first button press for a given trial
-        let numberOfTrials = trials.filter({block: blockNum, firstResponse: 1}).count(); //number of DIFFERENT trials
+        let correct_trials = trials.filter({correct: true, block: blockNum, first_response: 1}); //only: correct response, last block, first button press for a given trial
+        let numberOfTrials = trials.filter({block: blockNum, first_response: 1}).count(); //number of DIFFERENT trials
         let accuracy = Math.round(correct_trials.count() / numberOfTrials * 100); //mean accuracy in the given block
         let rt = Math.round(correct_trials.select('rt').mean()); //mean rt of the given block
         let message;
@@ -269,22 +269,22 @@ jsPsych.init({
 
         /*output properties*/
 
-        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0] //if the same trial is presented for the second time (previous response is incorrect) - write 0 in firstResponse
+        let lastTrialMinus1 = jsPsych.data.get().last(2).values()[0] //if the same trial is presented for the second time (previous response is incorrect) - write 0 in first_response
         let lastTrial = jsPsych.data.get().last(1).values()[0]
         if (typeof (lastTrial.target) != "undefined") {
             if (lastTrialMinus1.correct === false) {
                 if (lastTrial.target === lastTrialMinus1.target) {
-                    lastTrial.firstResponse = 0
+                    lastTrial.first_response = 0
                 }
             }
-        lastTrial.correctPos = parseInt(lastTrial.target[3])+1 //write the correct position in a separate column (1-4, from left to right)
-        lastTrial.correctRespButton = responseKeys[0][parseInt(lastTrial.target[3])] //write the name of the correct response button in a separate column
-        lastTrial.respButton = String.fromCharCode(lastTrial.key_press).toLowerCase() //write the name of the response button in a separate column
-        if (lastTrial.trialNumber == lastTrialMinus1.trialNumber){ //write cumulative RT in a separate column (the RT from stimulus appeared to CORRECT response)
-            lastTrial.cumulativeRT = lastTrial.rt + lastTrialMinus1.cumulativeRT
+        lastTrial.correct_pos = parseInt(lastTrial.target[3])+1 //write the correct position in a separate column (1-4, from left to right)
+        lastTrial.correct_resp_button = responseKeys[0][parseInt(lastTrial.target[3])] //write the name of the correct response button in a separate column
+        lastTrial.resp_button = String.fromCharCode(lastTrial.key_press).toLowerCase() //write the name of the response button in a separate column
+        if (lastTrial.trial_number == lastTrialMinus1.trial_number){ //write cumulative RT in a separate column (the RT from stimulus appeared to CORRECT response)
+            lastTrial.cumulative_RT = lastTrial.rt + lastTrialMinus1.cumulative_RT
         }
         else {
-            lastTrial.cumulativeRT = lastTrial.rt
+            lastTrial.cumulative_RT = lastTrial.rt
         }
 
     /*calculate triplet types*/
@@ -301,34 +301,34 @@ jsPsych.init({
 
         /* define the elements of the triplet*/
 
-        if(lastTrial.trialNumber == 1) {
-            actualTriplet = ["","",lastTrial.correctPos]
+        if(lastTrial.trial_number == 1) {
+            actualTriplet = ["","",lastTrial.correct_pos]
         }
-        else if (lastTrial.trialNumber == 2) {
-            actualTriplet = ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos]
+        else if (lastTrial.trial_number == 2) {
+            actualTriplet = ["",jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correct_pos, lastTrial.correct_pos]
         }
         else {
-            actualTriplet = [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correctPos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correctPos, lastTrial.correctPos];
+            actualTriplet = [jsPsych.data.get().last(lengthOfTrials-thirdTripletElementIndex).values()[0].correct_pos,jsPsych.data.get().last(lengthOfTrials-secondTripletElementIndex).values()[0].correct_pos, lastTrial.correct_pos];
         }
 
-        lastTrial.actualTriplet = actualTriplet.join().replace(/,/g, ""); //write the actual triplet to a separate column as a string
+        lastTrial.actual_triplet = actualTriplet.join().replace(/,/g, ""); //write the actual triplet to a separate column as a string
 
         /*define actual triplet as x, high, low, repetition or trill*/
 
-        if (lastTrial.isPractice == 1 || lastTrial.trialNumber <= 7) { //if practice block or first 7 element
-            lastTrial.tripletType = "X" //trials to exclude
+        if (lastTrial.is_practice == 1 || lastTrial.trial_number <= 7) { //if practice block or first 7 element
+            lastTrial.triplet_type = "X" //trials to exclude
         }
-        else if ((usedSequenceString.includes(lastTrial.actualTriplet[0] + lastTrial.actualTriplet[2])) || (usedSequenceString[3] + usedSequenceString[0] === lastTrial.actualTriplet[0] + lastTrial.actualTriplet[2])){ //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
-            lastTrial.tripletType = "H" //high-probability triplet
+        else if ((usedSequenceString.includes(lastTrial.actual_triplet[0] + lastTrial.actual_triplet[2])) || (usedSequenceString[3] + usedSequenceString[0] === lastTrial.actual_triplet[0] + lastTrial.actual_triplet[2])){ //if the 1st and the 3rd element of the triplet is part of the usedSequenceString
+            lastTrial.triplet_type = "H" //high-probability triplet
         }
         else if (actualTriplet[0] == actualTriplet[1] && actualTriplet[1] == actualTriplet[2]) { //if all 3 elements are identical
-            lastTrial.tripletType = "R" //repetition
+            lastTrial.triplet_type = "R" //repetition
         }
         else if (actualTriplet[0] == actualTriplet[2] && actualTriplet[0] != actualTriplet[1]) { //if 1st and 3rd elements are identical
-            lastTrial.tripletType = "T" //trill
+            lastTrial.triplet_type = "T" //trill
         }
         else {
-            lastTrial.tripletType = "L" //low-probability triplet
+            lastTrial.triplet_type = "L" //low-probability triplet
         }
 
     }
@@ -337,7 +337,7 @@ jsPsych.init({
         let interactionData = jsPsych.data.getInteractionData()
         const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
         if (interactionDataOfLastTrial) {
-            lastTrial.browserEvents = JSON.stringify(interactionDataOfLastTrial)
+            lastTrial.browser_events = JSON.stringify(interactionDataOfLastTrial)
          }
      },
  

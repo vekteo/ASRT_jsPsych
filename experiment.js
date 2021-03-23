@@ -78,6 +78,7 @@ const firstTrialProperties = {... trialProperties, pre_target_duration: initialD
 
 const feedback = {
     type: "html-keyboard-response",
+    trial_duration: 5000,
     stimulus: function () {
         let trials = jsPsych.data.get();
         let blockNum = jsPsych.data.get().last(1).values()[0].block; //relies only on the performance in the last block

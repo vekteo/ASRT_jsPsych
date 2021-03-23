@@ -325,6 +325,7 @@ jsPsych.init({
         const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
         if (interactionDataOfLastTrial) {
             lastTrial.browser_events = JSON.stringify(interactionDataOfLastTrial)
+
          }
      },
      on_close: function () {

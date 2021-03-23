@@ -1,7 +1,8 @@
 # ASRT_JSPsych
+
 <p>A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
 
-<p>The prorgam choses randomly an 8-element sequence alternating sequence, and assigns a random subject ID.</p>
+<p>The program choses randomly an 8-element sequence alternating sequence, and assigns a random subject ID.</p>
 
 <p>During the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the button corresponding to the target stimulus as fast and as accurately as he or she can.</p>
 
@@ -21,7 +22,9 @@
 
 <p>After the end of the task, output data are downloaded to the local machine (CSV format). If the user quits before the end of the task, the data are also downloaded to the local machine.</p>
 
+
 <h2>Output variables</h2>:
+
 - <strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)
 - <strong>trial_type:</strong> JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
 - <strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)
@@ -63,3 +66,4 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>
+

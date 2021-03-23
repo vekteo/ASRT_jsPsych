@@ -58,7 +58,7 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 <li><strong>numberOfPracticeBlocks:</strong> the number of practice blocks at the beginning</li>
 <li><strong>numberOfBlocks:</strong> the number of learning blocks (besides the practice blocks)</li>
 <li><strong>numberOfBlockElements:</strong> the number of sequence elements in a block</li>
-<li><strong>numberOfSequenceRepetitons:</strong>: the number of repetitons of the four-element sequence</li>
+<li><strong>numberOfSequenceRepetitons:</strong> the number of repetitons of the four-element sequence</li>
 <li><strong>patternTrialImage:</strong> the image used for the pattern trials</li>
 <li><strong>randomTrialImage:</strong> the image used for the random trials</li>
 <li><strong>rsi:</strong> the response-to-stimulus interval after a button press (in ms)</li>

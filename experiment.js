@@ -327,8 +327,10 @@ jsPsych.init({
             lastTrial.browser_events = JSON.stringify(interactionDataOfLastTrial)
          }
      },
- 
+     on_close: function () {
+        jsPsych.data.get().localSave("csv", "ASRT_quitted_output.csv"); //saves experiment output to .csv file if quitted earlier
+    },
      on_finish: function () {
-        jsPsych.data.get().localSave("csv", "output.csv"); //saves experiment output to .csv file
+        jsPsych.data.get().localSave("csv", "ASRT_output.csv"); //saves experiment output to .csv file
     }
 })

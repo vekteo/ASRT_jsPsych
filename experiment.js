@@ -319,7 +319,7 @@ jsPsych.init({
         }
 
     }
-        /*add browser events in JSON format*/
+        /*add browser events*/
 
         let interactionData = jsPsych.data.getInteractionData()
         const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();

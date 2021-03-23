@@ -22,9 +22,7 @@
 
 <p>After the end of the task, output data are downloaded to the local machine (CSV format). If the user quits before the end of the task, the data are also downloaded to the local machine.</p>
 
-
-<h2>Output variables</h2>:
-
+<h2>Output variables</h2>
 - <strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)
 - <strong>trial_type:</strong> JSPSych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)
 - <strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)
@@ -66,4 +64,3 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>
-

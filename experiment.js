@@ -17,38 +17,37 @@ let timeline = []; //create timeline
 const instruction = {
     type: "instructions",
     pages: [
-        "<h1>Welcome to the experiment!</h1>" +
-        "</p> Click on <strong>Next</strong> to continue.</p>",
-        "<p>In this experiment, you will see four circles on the screen. From left to right, the <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> keys correspond to the four circles.</p>" +
-        "<div class='float: center;'><img src='static/images/circles.png' height='156px' width='346px' alt='Circles'/></div>" +
-        "<p>An <b>image of a dog</b> will appear in one of the circles.</p>" +
-        "<div class='float: center;'><img src='static/images/dalmata.jpg' height='100px' width='100px' alt='Dalmata'/></div>" +
-        "<p>Your task will be to press the key corresponding to the position of the dog <strong>as quickly and as accurately as you can</strong>.",
-        "<p>Your will need to press the <strong>'S'</strong> key with the middle finger of your left hand," +
-        "<p>the <strong>'F'</strong> key with the index finger of your left hand</strong>" +
-        "<p>the <strong>'J'</strong> key with the index finger of your right hand," +
-        "<p>the <strong>'L'</strong> key with the middle finger of your right hand</strong>" +
-        "<div class='float: center;'><img src='static/images/hand.jpg' height='300px' width='500px' alt='Hand'/></div>" +
-        "<p>If the instructions are clear, click on <strong>Next</strong>; if not, you can go back and check the instructions again by clinking on <strong>Previous</strong>.</p>"
+        `<h1>${language.welcomePage.welcome}</h1></p>${language.welcomePage.clickNext}</p>`,
+        `<p>${language.instruction.fourCircles}</p>
+        <p>${language.instruction.dog}</p>
+        <p>${language.instruction.yourTask}
+        <div class='float: center;'>${language.instruction.img}</div>
+        <p>${language.instruction.restBetweenBlocks}`,
+        `<p>${language.instruction2.firstButton}</p>
+        <p>${language.instruction2.secondButton}</p>
+        <p>${language.instruction2.thirdButton}</p>
+        <p>${language.instruction2.fourthButton}</p>
+        <div class='float: center;'><img src='static/images/keyboard.bmp' height='10%' alt='Hand'/></div>
+        <p>${language.instruction2.ifClear}</p>`
     ],
-    show_clickable_nav: true
+    show_clickable_nav: true,
+    button_label_next: `${language.button.next}`,
+    button_label_previous: `${language.button.previous}`
 }
 
 const startPracticeInstruction = { //define instruction at the start of the practice
     type: "html-keyboard-response",
-    stimulus: "<p>If you are ready, press <strong>ANY</strong> key to start a practice!</p>"
+    stimulus: `<p>${language.practice.startPractice}</p>`
 };
 
 const startInstruction = { //define instruction at the start of the experiment
     type: "html-keyboard-response",
-    stimulus: "<p>The real task begins now.</p>" +
-        "<p>If you are ready, press <strong>ANY</strong> key to start the task!</p>"
+    stimulus: `<p>${language.task.realTask}</p><p>${language.task.startTask}</p>`
 };
 
 const end = { //define end of experiment message
     type: "html-keyboard-response",
-    stimulus: "<p>End of the experiment.</p>" +
-        "<p>Thank you for participating!</p>"
+    stimulus: `<p>${language.end.endTask}</p><p>${language.end.thankYou}</p>`
 };
 
 const subject_id = jsPsych.randomization.randomID(15); //generate a random subject ID
@@ -96,22 +95,19 @@ const feedback = {
         let rt = Math.round(correct_trials.select('rt').mean()); //mean rt of the given block
         let message;
         if (accuracy < 90) { //if mean accuracy is less than 90, show this message
-            message = "<p class='message'><strong>Try to be more accurate!</strong></p>"
+            message = `<p class='message'><strong>${language.feedback.moreAccurate}</strong></p>`
         } else if (accuracy >= 93 && rt > 200) { //if mean rt is higher than 200 ms, and accuracy than 92%, show this message
-            message = "<p class='message'><strong>Try to be faster!</strong></p>"
+            message = `<p class='message'><strong>${language.feedback.faster}</strong></p>`
         } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
-            message = "<p class='message'><strong>Please continue!</strong></p>"
+            message = `<p class='message'><strong>${language.feedback.continue}</strong></p>`
         }
-        return "<h2>End of block " + blockNum + "</h2>" +
-            "<p>Your accuracy: " + accuracy + "%</p>" +
-            "<p>Your average response time: " + rt + " ms</p>" + message +
-            "<h3 class='continue'>Press any key to continue!</h3>";
+        return `<h2>${language.feedback.endBlock}${blockNum}</h2><br><p>${language.feedback.yourAccuracy}${accuracy}%</p><p>${language.feedback.yourRt}${rt} ms</p><br>${message}`
     }
 }
 
 const blockStart = {
     type: "html-keyboard-response",
-    stimulus: "<p>Press any key to start the next block!</p>"
+    stimulus: `<p>${language.task.nextBlock}</p>`
 };
 
 const images = ["static/images/hand.jpg", "static/images/circles.png", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)

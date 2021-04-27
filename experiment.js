@@ -143,7 +143,7 @@ function randomStimulusProc(block, trialNumber, isFirstTrial, isPractice) {
         stimuli[0].data.is_practice = 1;
         trialProp = firstTrialProperties;
     }
-    if (isPractice == 1) {
+    else if (isPractice == 1) {
         stimuli[0].data.is_practice = 1;
         trialProp = randomTrialProperties
     } 
@@ -194,18 +194,27 @@ jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 /* practice blocks*/
 
-for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
-    actualRandom = randomStimulusProc(j,1,1,1) //longer delay before first element
-    timeline.push(actualRandom);
-    insertRepetition(randomRepeat(actualRandom));
-    for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
-        actualRandom = randomStimulusProc(j,l,0,1);
+if (numberOfPracticeBlocks > 0) {
+    timeline.push(startPracticeInstruction)
+    for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
+        actualRandom = randomStimulusProc(j,1,1,1) //longer delay before first element
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
+        for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
+            actualRandom = randomStimulusProc(j,l,0,1);
+            timeline.push(actualRandom);
+            insertRepetition(randomRepeat(actualRandom));
+        }
+        timeline.push(feedback);
+    
+        if (j!==numberOfPracticeBlocks){
+            timeline.push(blockStart);
+        }
     }
     timeline.push(feedback);
     timeline.push(blockStart);
 }
+
 timeline.push(startInstruction);
 
 /* sequence protocol */

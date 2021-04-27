@@ -189,7 +189,6 @@ function insertRepetition(element) {
 
 timeline.push({type: "fullscreen", fullscreen_mode: true});
 timeline.push(instruction);
-timeline.push(startPracticeInstruction)
 jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 /* practice blocks*/
@@ -211,8 +210,6 @@ if (numberOfPracticeBlocks > 0) {
             timeline.push(blockStart);
         }
     }
-    timeline.push(feedback);
-    timeline.push(blockStart);
 }
 
 timeline.push(startInstruction);

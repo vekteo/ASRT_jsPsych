@@ -37,17 +37,35 @@ const instruction = {
 
 const startPracticeInstruction = { //define instruction at the start of the practice
     type: "html-keyboard-response",
-    stimulus: `<p>${language.practice.startPractice}</p>`
+    stimulus: 
+        `<h2>${language.practice.practiceSoon}</h2>
+        <p>${language.task.place}</p>
+        <img src="static/images/keyboard.bmp" height='10%'>
+        <p><strong>${language.practice.startPractice}</strong></p>`
 };
+
+const blockStart = {
+    type: "html-keyboard-response",
+    stimulus: `
+    <h2>${language.task.nextBlockSoon}</h2>
+    <p>${language.task.place}</p>
+    <img src="static/images/keyboard.bmp" height='10%'>
+    <p><strong>${language.task.nextBlock}</strong></p>`
+};
+
 
 const startInstruction = { //define instruction at the start of the experiment
     type: "html-keyboard-response",
-    stimulus: `<p>${language.task.realTask}</p><p>${language.task.startTask}</p>`
+    stimulus: 
+        `<h2>${language.task.realTask}</h2>
+        <p>${language.task.place}</p>
+        <img src="static/images/keyboard.bmp" height='10%'>
+        <p>${language.task.startTask}</p>`
 };
 
 const end = { //define end of experiment message
     type: "html-keyboard-response",
-    stimulus: `<p>${language.end.endTask}</p><p>${language.end.thankYou}</p>`
+    stimulus: `<h2>${language.end.endTask}</p><p>${language.end.thankYou}</h2>`
 };
 
 const subject_id = jsPsych.randomization.randomID(15); //generate a random subject ID
@@ -79,6 +97,7 @@ const firstTrialProperties = {... trialProperties, pre_target_duration: initialD
 const feedback = {
     type: "html-keyboard-response",
     trial_duration: 5000,
+    response_ends_trial: false,
     stimulus: function () {
         let trials = jsPsych.data.get();
         let blockNum = jsPsych.data.get().last(1).values()[0].block; //relies only on the performance in the last block
@@ -89,19 +108,14 @@ const feedback = {
         let message;
         if (accuracy < 90) { //if mean accuracy is less than 90, show this message
             message = `<p class='message'><strong>${language.feedback.moreAccurate}</strong></p>`
-        } else if (accuracy >= 93 && rt > 200) { //if mean rt is higher than 200 ms, and accuracy than 92%, show this message
+        } else if (rt > 350) { //if mean rt is higher than 350ms
             message = `<p class='message'><strong>${language.feedback.faster}</strong></p>`
-        } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
+        } else { //else, show this message
             message = `<p class='message'><strong>${language.feedback.continue}</strong></p>`
         }
         return `<h2>${language.feedback.endBlock}${blockNum}</h2><br><p>${language.feedback.yourAccuracy}${accuracy}%</p><p>${language.feedback.yourRt}${rt} ms</p><br>${message}`
     }
 }
-
-const blockStart = {
-    type: "html-keyboard-response",
-    stimulus: `<p>${language.task.nextBlock}</p>`
-};
 
 const images = ["static/images/ASRT_en.gif", "static/images/ASRT_hu.gif", "static/images/keyboard.bmp", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
@@ -129,7 +143,7 @@ function randomStimulusProc(block, trialNumber, isFirstTrial, isPractice) {
         stimuli[0].data.is_practice = 1;
         trialProp = firstTrialProperties;
     }
-    if (isPractice == 1) {
+    else if (isPractice == 1) {
         stimuli[0].data.is_practice = 1;
         trialProp = randomTrialProperties
     } 
@@ -175,23 +189,29 @@ function insertRepetition(element) {
 
 timeline.push({type: "fullscreen", fullscreen_mode: true});
 timeline.push(instruction);
-timeline.push(startPracticeInstruction)
 jsPsych.data.addProperties({subject: subject_id}); //add subject ID to the data
 
 /* practice blocks*/
 
-for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
-    actualRandom = randomStimulusProc(j,1,1,1) //longer delay before first element
-    timeline.push(actualRandom);
-    insertRepetition(randomRepeat(actualRandom));
-    for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
-        actualRandom = randomStimulusProc(j,l,0,1);
+if (numberOfPracticeBlocks > 0) {
+    timeline.push(startPracticeInstruction)
+    for (let j = 1; j < numberOfPracticeBlocks+1; j++) {
+        actualRandom = randomStimulusProc(j,1,1,1) //longer delay before first element
         timeline.push(actualRandom);
         insertRepetition(randomRepeat(actualRandom));
+        for (let l = 2; l < (numberOfBlockElements+1); l++) { //now 85 practice element in one block
+            actualRandom = randomStimulusProc(j,l,0,1);
+            timeline.push(actualRandom);
+            insertRepetition(randomRepeat(actualRandom));
+        }
+        timeline.push(feedback);
+    
+        if (j!==numberOfPracticeBlocks){
+            timeline.push(blockStart);
+        }
     }
-    timeline.push(feedback);
-    timeline.push(blockStart);
 }
+
 timeline.push(startInstruction);
 
 /* sequence protocol */

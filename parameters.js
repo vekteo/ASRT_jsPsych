@@ -1,5 +1,5 @@
-const language = en; //available languages: english (en), hungarian (hu), french (fr), portoguise (pt)
-const numberOfPracticeBlocks = 3;
+const language = hu; //available languages: english (en), hungarian (hu), french (fr), portoguise (pt)
+const numberOfPracticeBlocks = 2;
 const numberOfBlocks = 20;
 const numberOfBlockElements = 85;
 const numberOfSequenceRepetitions = 10;

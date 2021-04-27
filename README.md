@@ -15,7 +15,7 @@
 <p>Average performance (mean accuracy and mean RT) is presented as a feedback after the end of the block with a personalized instruction:</p>
 
 - if the mean accuracy of the block is less than 90%, it instructs to be more accurate.
-- if the mean RT of the block is more than 200 ms and the accuracy is higher than or equals to 93%, it instructs to be faster.
+- if the mean RT of the block is over 350 ms, it instructs to be faster.
 - in other cases, it instructs to continue the task.
 
 <p>The breaks between the blocks are <strong>self-paced</strong>. The user can continue the task when he or she presses a button.</p>

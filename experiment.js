@@ -37,17 +37,35 @@ const instruction = {
 
 const startPracticeInstruction = { //define instruction at the start of the practice
     type: "html-keyboard-response",
-    stimulus: `<p>${language.practice.startPractice}</p>`
+    stimulus: 
+        `<h2>${language.practice.practiceSoon}</h2>
+        <p>${language.task.place}</p>
+        <img src="static/images/keyboard.bmp" height='10%'>
+        <p><strong>${language.practice.startPractice}</strong></p>`
 };
+
+const blockStart = {
+    type: "html-keyboard-response",
+    stimulus: `
+    <h2>${language.task.nextBlockSoon}</h2>
+    <p>${language.task.place}</p>
+    <img src="static/images/keyboard.bmp" height='10%'>
+    <p><strong>${language.task.nextBlock}</strong></p>`
+};
+
 
 const startInstruction = { //define instruction at the start of the experiment
     type: "html-keyboard-response",
-    stimulus: `<p>${language.task.realTask}</p><p>${language.task.startTask}</p>`
+    stimulus: 
+        `<h2>${language.task.realTask}</h2>
+        <p>${language.task.place}</p>
+        <img src="static/images/keyboard.bmp" height='10%'>
+        <p>${language.task.startTask}</p>`
 };
 
 const end = { //define end of experiment message
     type: "html-keyboard-response",
-    stimulus: `<p>${language.end.endTask}</p><p>${language.end.thankYou}</p>`
+    stimulus: `<h2>${language.end.endTask}</p><p>${language.end.thankYou}</h2>`
 };
 
 const subject_id = jsPsych.randomization.randomID(15); //generate a random subject ID
@@ -97,11 +115,6 @@ const feedback = {
         return `<h2>${language.feedback.endBlock}${blockNum}</h2><br><p>${language.feedback.yourAccuracy}${accuracy}%</p><p>${language.feedback.yourRt}${rt} ms</p><br>${message}`
     }
 }
-
-const blockStart = {
-    type: "html-keyboard-response",
-    stimulus: `<p>${language.task.nextBlock}</p>`
-};
 
 const images = ["static/images/ASRT_en.gif", "static/images/ASRT_hu.gif", "static/images/keyboard.bmp", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 

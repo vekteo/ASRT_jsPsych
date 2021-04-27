@@ -18,16 +18,19 @@ const en = {
         ifClear: "If the instructions are clear, click on <strong>Next</strong>; if not, you can go back and check the instructions again by clinking on <strong>Previous</strong>."
     },
     practice: {
-        startPractice: "If you are ready, press <strong>any</strong> key to start a practice!"
+        startPractice: "If you are ready, press <strong>any</strong> key to start a practice!",
+        practiceSoon: "Now a short practice will start."
     },
     task: {
         realTask: "The real task begins now.",
         startTask: "If you are ready, press <strong>any</strong> key to start the task!",
-        nextBlock: "Press any key to start the next block!"
+        nextBlock: "Press any key to start the next block!",
+        nextBlockSoon: "The next block starts soon.",
+        place: "Please place your fingers in this position on the keyboard:"
     },
     end: {
         endTask: "End of the experiment.",
-        thankYou: "Thank you for participating!"
+        thankYou: "Thank you!"
     },
     feedback: {
         endBlock: "End of block ",
@@ -67,16 +70,19 @@ const hu = {
         ifClear: "Ha világosak az instrukciók, akkor kattints a <strong>Tovább</strong> gombra; amennyiben nem, a <strong>Vissza</strong> gomb megnyomásával visszamehetsz az előző oldalra." 
     },
     practice: {
-        startPractice: "Ha készenállsz, nyomd meg <strong>bármelyik</strong> gombot egy rövid gyakorlás megkezdéséhez!"
+        startPractice: "Ha készenállsz, nyomd meg <strong>bármelyik</strong> gombot egy rövid gyakorlás megkezdéséhez!",
+        practiceSoon: "Most egy rövid gyakorlás következik."
     },
     task: {
         realTask: "A feladat most kezdődik élesben.",
         startTask: "Ha készen állsz, nyomd meg <strong>bármelyik</strong> gombot a kezdéshez!",
-        nextBlock: "Nyomd meg bármelyik gombot a következő blokk indításához!"
+        nextBlock: "Nyomd meg bármelyik gombot a következő blokk indításához!",
+        nextBlockSoon: "A következő blokk hamarosan indul.",
+        place: "Helyezd az ujjaidat az alábbi pozícióba a billentyűzeteden:"
     },
     end: {
         endTask: "Vége a feladatnak.",
-        thankYou: "Köszönjük a részvételt!",
+        thankYou: "Köszönjük!",
     },
     feedback: {
         endBlock: "Vége ennek a blokknak: ",
@@ -116,16 +122,19 @@ const fr = {
         ifClear: "Si les instructions sont claires, cliquez sur <strong>Suivant</strong> ; sinon, vous pouvez revenir en arrière et vérifier à nouveau les instructions en cliquant sur <strong>Précédent</strong>."
     },
     practice: {
-        startPractice: "Si vous êtes prêt, appuyez sur <strong>n'importe quelle touche</strong> du clavier pour commencer un entraînement!"
+        startPractice: "Si vous êtes prêt, appuyez sur <strong>n'importe quelle touche</strong> du clavier pour commencer un entraînement!",
+        practiceSoon: "Maintenant un petit entraînement va démarrer."
     },
     task: {
         realTask: "La vraie tâche va maintenant commencer.",
         startTask: "Si vous êtes prêt, appuyez sur <strong>n'importe quelle touche</strong> pour commencer la tâche!",
-        nextBlock: "Appuyez sur n'importe quelle touche pour débuter le prochain bloc!"
+        nextBlock: "Appuyez sur n'importe quelle touche pour débuter le prochain bloc!",
+        nextBlockSoon: "Le prochain bloc va bientôt commencer.",
+        place: "Merci de placer vos doigt sur le clavier dans cette position:"
     },
     end: {
         endTask: "Fin de l'expérience.",
-        thankYou: "Merci de votre participation!"
+        thankYou: "Merci!"
     },
     feedback: {
         endBlock: "Fin du bloc ",
@@ -165,16 +174,19 @@ const pt = {
         ifClear: "Se as instruções estão claras, clique em <strong>Próximo</strong>; senão, você pode voltar e checar de novo as instruções clicando em <strong>Anterior</strong>."
     },
     practice: {
-        startPractice: "Se você estiver pronto, aperte <strong>qualquer</strong> tecla para começar um treino!"
+        startPractice: "Se você estiver pronto, aperte <strong>qualquer</strong> tecla para começar um treino!",
+        practiceSoon: "Agora você terá um pequeno treino."
     },
     task: {
         realTask: "A verdadeira tarefa começa agora.",
         startTask: "Se você estiver pronto, aperte <strong>qualquer</strong> tecla para começar a tarefa!",
-        nextBlock: "Aperte qualquer tecla para iniciar o próximo bloco!"
+        nextBlock: "Aperte qualquer tecla para iniciar o próximo bloco!",
+        nextBlockSoon: "O próximo bloco começará logo.",
+        place: "Por favor posicione seus dedos nesta posição no teclado:"
     },
     end: {
         endTask: "Fim do experimento.",
-        thankYou: "Muito obrigado pela sua participação!"
+        thankYou: "Muito obrigado!"
     },
     feedback: {
         endBlock: "Fim do bloco ",
@@ -191,5 +203,57 @@ const pt = {
     fullscreen: {
         fullscreenText: "O experimento irá passar para o modo tela cheia quando você clicar no botão abaixo.",
         fullscreenButton: "Continue"
+    },
+}
+
+const es = {
+    welcomePage: {
+        welcome: "Bienvenid@!",
+        clickNext: "Haz clic en <strong>Siguiente</strong> para continuar."
+    },
+    instruction: {
+        fourCircles: "En esta tarea verás aparecer cuatro círculos en pantalla. De izquierda a derecha, las teclas <strong>'S'</strong>, <strong>'F'</strong>, <strong>'J'</strong> and <strong>'L'</strong> corresponden a los cuatro círculos.",
+        dog: "Cada tanto, la <b>imagen de un perro</b> irá apareciendo en uno de los cuatro círculos.",
+        yourTask: "Tu objetivo es 'atrapar al perro' haciendo clic en una de las cuatro teclas correspondientes a la localización del perro. <strong>Intenta ser lo más rápid@ y precis@ que puedas</strong>.",
+        restBetweenBlocks: "Cada pocos minutos, habrá una pausa en la que te mostraremos tus promedios de precisión y de tiempo de reacción. Podrás usar estas informaciones para mejorar tu desepeño.",
+        img: "<img src='static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
+    },
+    instruction2: {
+        firstButton: "Presiona  la tecla <strong>'S'</strong>con el dedo medio de tu mano izquierda,",
+        secondButton: "La tecla <strong>'F'</strong> con el dedo índice de tu mano izquierda</strong>",
+        thirdButton: "La tecla <strong>'J'</strong> con el dedo índice de tu mano derecha ,",
+        fourthButton: "La tecla <strong>'L'</strong> con el dedo medio de tu mano derecha</strong>.",
+        ifClear: "Si has entendido las instrucciones, haz clic en <strong>Siguiente</strong>; de lo contrario, puedes volver a ver las instrucciones haciendo clic en <strong>Atrás</strong>."
+    },
+    practice: {
+        startPractice: "Si estás list@, presiona <strong>cualquier</strong> tecla para empezar el entrenamiento!",
+        practiceSoon: "Un entrenamiento corto empezará ahora."
+    },
+    task: {
+        realTask: "Fin del entrenamiento. La verdadera tarea empieza ahora.",
+        startTask: "Si estás list@, presiona <strong>cualquier</strong> tecla para empezar la tarea!",
+        nextBlock: "Presiona cualquier tecla para empezar el siguiente bloque!",
+        nextBlockSoon: "El próximo bloque empezará dentro de poco",
+        place: "Por favor coloca tus dedos en el teclado de la siguiente manera."
+    },
+    end: {
+        endTask: "Fin del experimento.",
+        thankYou: "Gracias!"
+    },
+    feedback: {
+        endBlock: "Fin del bloque ",
+        yourAccuracy: "Tu precisión fue: ",
+        yourRt: "Tu tiempo de reacción promedio fue: ",
+        moreAccurate: "Intenta ser más precis@!",
+        faster: "Intenta ser más rápid@!",
+        continue: "Bien hecho!"
+    },
+    button: {
+        next: "Siguiente",
+        previous: "Atrás"
+    },
+    fullscreen: {
+        fullscreenText: "El experimento pasará a pantalla completa al cliquear en Continuar.",
+        fullscreenButton: "Continuar"
     },
 }

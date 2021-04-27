@@ -108,9 +108,9 @@ const feedback = {
         let message;
         if (accuracy < 90) { //if mean accuracy is less than 90, show this message
             message = `<p class='message'><strong>${language.feedback.moreAccurate}</strong></p>`
-        } else if (accuracy >= 93 && rt > 200) { //if mean rt is higher than 200 ms, and accuracy than 92%, show this message
+        } else if (rt > 350) { //if mean rt is higher than 350ms
             message = `<p class='message'><strong>${language.feedback.faster}</strong></p>`
-        } else { //if mean accuracy is over 92% and mean rt is smaller than 500 ms, show this message
+        } else { //else, show this message
             message = `<p class='message'><strong>${language.feedback.continue}</strong></p>`
         }
         return `<h2>${language.feedback.endBlock}${blockNum}</h2><br><p>${language.feedback.yourAccuracy}${accuracy}%</p><p>${language.feedback.yourRt}${rt} ms</p><br>${message}`

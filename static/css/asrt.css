@@ -14,3 +14,23 @@ p{
     padding-top: 100px;
     color: red;
 }
+
+.formDiv {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#startDiv {
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.warning{
+    margin-top: 10%;
+}

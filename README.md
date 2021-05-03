@@ -2,8 +2,6 @@
 
 <p>A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
 
-<p>The program choses randomly an 8-element sequence alternating sequence, and assigns a random subject ID.</p>
-
 <p>During the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the button corresponding to the target stimulus as fast and as accurately as he or she can.</p>
 
 <p>The task begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element sequence.</p>
@@ -63,6 +61,9 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 <li><strong>randomTrialImage:</strong> the image used for the random trials</li>
 <li><strong>rsi:</strong> the response-to-stimulus interval after a button press (in ms)</li>
 <li><strong>initialDelay:</strong> the delay before the first trial of a block</li>
+
+<h2>How to start the task</h2>
+Open the <i>index.html</i> file in either the <i>offline</i> or <i>online</i> folder. When the offline version is started, you can customize the subject and session numbers (any number is accepted). If you start the offline version, a random subject ID will be allocated. In the offline versions, the subject number determines the used sequence (out of the 24 possible sequences). For the same subject number, the same sequence will be used with every session numbers.
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>

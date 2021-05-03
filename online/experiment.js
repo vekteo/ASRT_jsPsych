@@ -27,7 +27,7 @@ const instruction = {
         <p>${language.instruction2.secondButton}</p>
         <p>${language.instruction2.thirdButton}</p>
         <p>${language.instruction2.fourthButton}</p>
-        <div class='float: center;'><img src='static/images/keyboard.bmp' height='10%' alt='Hand'/></div>
+        <div class='float: center;'><img src='../static/images/keyboard.bmp' height='10%' alt='Hand'/></div>
         <p>${language.instruction2.ifClear}</p>`
     ],
     show_clickable_nav: true,
@@ -40,7 +40,7 @@ const startPracticeInstruction = { //define instruction at the start of the prac
     stimulus: 
         `<h2>${language.practice.practiceSoon}</h2>
         <p>${language.task.place}</p>
-        <img src="static/images/keyboard.bmp" height='10%'>
+        <img src="../static/images/keyboard.bmp" height='10%'>
         <p><strong>${language.practice.startPractice}</strong></p>`
 };
 
@@ -49,7 +49,7 @@ const blockStart = {
     stimulus: `
     <h2>${language.task.nextBlockSoon}</h2>
     <p>${language.task.place}</p>
-    <img src="static/images/keyboard.bmp" height='10%'>
+    <img src="../static/images/keyboard.bmp" height='10%'>
     <p><strong>${language.task.nextBlock}</strong></p>`
 };
 
@@ -59,7 +59,7 @@ const startInstruction = { //define instruction at the start of the experiment
     stimulus: 
         `<h2>${language.task.realTask}</h2>
         <p>${language.task.place}</p>
-        <img src="static/images/keyboard.bmp" height='10%'>
+        <img src="../static/images/keyboard.bmp" height='10%'>
         <p>${language.task.startTask}</p>`
 };
 
@@ -117,7 +117,7 @@ const feedback = {
     }
 }
 
-const images = ["static/images/ASRT_en.gif", "static/images/ASRT_hu.gif", "static/images/keyboard.bmp", "static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
+const images = ["../static/images/ASRT_en.gif", "../static/images/ASRT_hu.gif", "../static/images/keyboard.bmp", "../static/images/dalmata.jpg"]; //preload memo logo (stimuli images are preloaded automatically)
 
 /*************** FUNCTIONS ***************/
 

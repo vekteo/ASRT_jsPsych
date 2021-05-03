@@ -27,7 +27,8 @@
 <li><strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)</li>
 <li><strong>time_elapsed:</strong> the time elapsed from the start of the script in ms</li>
 <li><strong>internal_code_id:</strong> internal node id of the trial</li>
-<li><strong>subject:</strong> randomly generated 15-character-long subject ID</li>
+<li><strong>subject:</strong> a 15-character long random subject ID for the online version, and customized subject number for the offline version</li>
+<li><strong>session:</strong> customized session number (for offline version only)</li>
 <li><strong>browser_event:</strong> browser events at the given trial (fullscreenenter, fullscreenexit, blur or focus)</li>
 <li><strong>view_history:</strong> only relavant at the instructions; the actions and the corresponding RTs during the reading of the instructions</li>
 <li><strong>rt:</strong> reaction time (RT) in ms - in the case of first responses to the trial, it shows the rt calculated from the appearance of the stimulus; in the case of not first responses, it shows the rt calculated from the last button press</li>

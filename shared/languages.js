@@ -8,7 +8,7 @@ const en = {
         dog: "From time to time, an <b>image of a dog</b> will appear in one of the circles.",
         yourTask: "Your task will be to 'catch the dog' by pressing the key corresponding to the position of the dog <strong>as quickly and as accurately as you can</strong>.",
         restBetweenBlocks: "In every few minutes, there will be a short pause, when we will show you your average accuracy and response time, which you can use to ameliorate your performance.",
-        img: "<img src='static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
+        img: "<img src='../static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
     },
     instruction2: {
         firstButton: "Your will need to press the <strong>'S'</strong> key with the middle finger of your left hand,",
@@ -48,6 +48,16 @@ const en = {
         fullscreenText: "The experiment will switch to full screen mode when you press the button below.",
         fullscreenButton: "Continue"
     },
+    parameters: {
+        subject: "Subject Number:",
+        session: "Session Number:"
+    },
+    startWarning: {
+        startSubject: "You are about to start the task with<strong> Subject Number ",
+        startSession: "</strong> and <strong>Session Number ",
+        startButton: "Start the task!",
+        goBackButton: "Change the parameters"
+    },
 }
 
 const hu = {
@@ -60,7 +70,7 @@ const hu = {
         dog: "Időről időre egy <b>kutyafej</b> fog megjelenni valamelyik körben.",
         yourTask: "A feladatod az lesz, hogy 'elkapd a kutyát' a kutyafej megjelenési helyéhez tartozó gomb <strong>minél pontosabb és minél gyorsabb lenyomásával</strong>.",
         restBetweenBlocks: "A feladat során néhány percenként lesz egy rövid szünet, amikor megmutatjuk számodra az átlagos pontosságod és reakcióidődet, amit felhasználhatsz a tejesítményed javításához.",
-        img: "<img src='static/images/ASRT_hu.gif' width='30%' alt='Dalmata'/>"
+        img: "<img src='../static/images/ASRT_hu.gif' width='30%' alt='Dalmata'/>"
     },
     instruction2: {
         firstButton: "Az <strong>'S'</strong> billentyűt a bal kezed középsőujjával,",
@@ -100,6 +110,16 @@ const hu = {
          fullscreenText: "A feladat teljes képernyőre ugrik, amint megnyomod a Tovább gombot.",
          fullscreenButton: "Tovább"
     },
+    parameters: {
+        subject: "Vizsgálati személy száma: ",
+        session: "Ülés száma: "
+    },
+    startWarning: {
+        startSubject: "Feladat kezdése <strong> ezzel a vizsgálati személy számmal: ",
+        startSession: "</strong> és <strong>ezzel az ülésszámmal: ",
+        startButton: "Feladat kezdése",
+        goBackButton: "Paraméterek változtatása"
+    },
 }
 
 const fr = {
@@ -112,7 +132,7 @@ const fr = {
         dog: "De temps en temps, une <b>image d'un chien</b> apparaîtra dans l'un des cercles.",
         yourTask: "Votre tâche consistera à 'attraper le chien' en appuyant sur la touche correspondant à la position du chien <strong>aussi vite et aussi précisément que possible</strong>.",
         restBetweenBlocks: "À intervalle de quelques minutes, il y aura une courte pause, au cours de laquelle nous vous montrerons votre précision et votre temps de réponse moyens, que vous pourrez utiliser pour améliorer vos performances.",
-        img: "<img src='static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
+        img: "<img src='../static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
     },
     instruction2: {
         firstButton: "Vous devrez appuyer sur la touche <strong>'S'</strong> avec le majeur de votre main gauche,",
@@ -152,6 +172,17 @@ const fr = {
         fullscreenText: "L'expérience passera en mode plein écran lorsque vous appuyerez sur le bouton ci-dessous",
         fullscreenButton: "Continuer"
     },
+    parameters: {
+        subject: "Numéro du sujet : ",
+        session: "Numéro de session : "
+    },
+    startWarning: {
+        startSubject: "Vous êtes sur le point de commencer la tâche avec <strong>Numéro de sujet ",
+        startSession: "</strong> et <strong>Numéro de session ",
+        startButton: "Commencez la tâche !",
+        goBackButton: "Modifier les paramètres"
+    },
+    
 }
 
 const pt = {
@@ -164,7 +195,7 @@ const pt = {
         dog: "Às vezes, uma <b>imagem de um cachorro</b> vai aparecer em um dos círculos.",
         yourTask: "Sua tarefa será 'capturar o cachorro' apertando a tecla correspondente à posição do cachorro, e sendo <strong>o mais rápido e preciso que você puder</strong>.",
         restBetweenBlocks: "A cada poucos minutos, haverá uma pequena pausa, quando vamos te mostrar sua média de precisão e seu tempo de resposta, que você pode utilisar para melhorar sua performance.",
-        img: "<img src='static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
+        img: "<img src='../static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
     },
     instruction2: {
         firstButton: "Você vai precisar apertar a tecla <strong>'S'</strong> com o dedo do meio da sua mão esquerda,",
@@ -204,6 +235,16 @@ const pt = {
         fullscreenText: "O experimento irá passar para o modo tela cheia quando você clicar no botão abaixo.",
         fullscreenButton: "Continue"
     },
+    parameters: {
+        subject: "Assunto número: ",
+        session: "Número da sessão: "
+    },
+    startWarning: {
+        startSubject: "Você está prestes a iniciar a tarefa com<strong> Número do assuntot ",
+        startSession: "</strong> e <strong>Sessão número ",
+        startButton: "Comece a tarefa!",
+        goBackButton: "Alterar os parâmetros"
+    },
 }
 
 const es = {
@@ -216,7 +257,7 @@ const es = {
         dog: "Cada tanto, la <b>imagen de un perro</b> irá apareciendo en uno de los cuatro círculos.",
         yourTask: "Tu objetivo es 'atrapar al perro' haciendo clic en una de las cuatro teclas correspondientes a la localización del perro. <strong>Intenta ser lo más rápid@ y precis@ que puedas</strong>.",
         restBetweenBlocks: "Cada pocos minutos, habrá una pausa en la que te mostraremos tus promedios de precisión y de tiempo de reacción. Podrás usar estas informaciones para mejorar tu desepeño.",
-        img: "<img src='static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
+        img: "<img src='../static/images/ASRT_en.gif' width='30%' alt='Dalmata'/>"
     },
     instruction2: {
         firstButton: "Presiona  la tecla <strong>'S'</strong>con el dedo medio de tu mano izquierda,",
@@ -255,5 +296,15 @@ const es = {
     fullscreen: {
         fullscreenText: "El experimento pasará a pantalla completa al cliquear en Continuar.",
         fullscreenButton: "Continuar"
+    },
+    parameters: {
+        subject: "Número de asunto: ",
+        session: "Número de sesión: "
+    },
+    startWarning: {
+        startSubject: "Está a punto de iniciar la tarea con <strong>Número de Asunto ",
+        startSession: "</strong> y <strong>Número de Sesión ",
+        startButton: "¡Inicia la tarea!",
+        goBackButton: "Cambiar los parámetros"
     },
 }

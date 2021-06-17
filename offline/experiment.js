@@ -195,7 +195,7 @@ function expStart(subject, session) {
 
     timeline.push({type: "fullscreen", fullscreen_mode: true});
     timeline.push(instruction);
-    jsPsych.data.addProperties({subject: subjectID}); //add subject ID to the data
+    jsPsych.data.addProperties({subject: subjectID, session: sessionNumber}); //add subject ID to the data
 
     /* practice blocks*/
 

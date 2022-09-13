@@ -6,13 +6,13 @@
 
 <p>A self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
 
-<p>During the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as he or she can.</p>
+<p>In the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as they can.</p>
 
 <p>By default, the task begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element sequence.</p>
 
-<p>The trials are images of dogs. The <strong>'s', 'f', 'j' and 'l'</strong> keys on the keyboard are set as response keys (corresponding to the four positions from left to right).</p<>>
+<p>The trials are images of dogs. The <strong>'s', 'f', 'j' and 'l'</strong> keys on the keyboard are set as response keys (corresponding to the four positions from left to right).</p>
 
-<p>If correct response is given, the next element is presented after a 120 ms response-to-stimulus interval. If the response is wrong (but active response key was pressed), the same target stimulus appears on the screen again with an interstimulus interval of 0 ms (i.e., remains on the screen).</p>
+<p>If correct response is given, the next element is presented after a 120 ms response-to-stimulus interval. If the response is incorrect (but active response key was pressed), the same target stimulus appears on the screen again with an interstimulus interval of 0 ms (i.e., remains on the screen).</p>
 
 <p>Average performance (mean accuracy and mean RT) is presented as a feedback after the end of the block with a personalized instruction:</p>
 
@@ -20,9 +20,9 @@
 - if the mean RT of the block is over 350 ms, it instructs to be faster.
 - in other cases, it instructs to continue the task.
 
-<p>The breaks between the blocks are <strong>self-paced</strong>. The user can continue the task when he or she presses a response key.</p>
+<p>The breaks between the blocks are <strong>self-paced</strong>. The user can continue the task when they press a response key.</p>
 
-<p>After the end of the task, output data are downloaded to the local machine (CSV format). If the user quits before the end of the task, the data are also downloaded to the local machine.</p>
+<p>After the end of the task, output data downloads to the local machine (CSV format). If the user quits before the end of the task, the data also downloads to the local machine.</p>
 
 <h2>Output variables</h2>
 <ul>

@@ -2,7 +2,9 @@
 
 <i>Created by the MEMO Team of Lyon Neuroscience Research Center (CRNL) (PI: Dezso Nemeth)</i>
 
-<p>A simple, self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
+<img src="static/logo_memo.png" height="100">
+
+<p>A self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
 
 <p>During the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as he or she can.</p>
 

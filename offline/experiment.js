@@ -1,15 +1,3 @@
-/* 
-Created by Teodora Vekony (vekteo@gmail.com)
-Lyon Neuroscience Research Center
-Universite Claude Bernard Lyon 1
-
-Supervised and optimized by Szonja Weigl
-Lyon Neuroscience Research Center
-Universite Claude Bernard Lyon 1
-
-Github:https://github.com/vekteo/ASRT_jSPsych
-*/
-
 function expStart(subject, session) {
 
     /*************** VARIABLES ***************/

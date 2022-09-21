@@ -4,7 +4,7 @@
 
 <img src="static/logo_memo.png" height="100">
 
-<p>A self-paced <strong>Alternating Serial Reaction Time (ASRT)</strong> task.</p>
+<h2>About the task</h2>
 
 <p>In the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as they can.</p>
 

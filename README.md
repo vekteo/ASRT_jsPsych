@@ -34,14 +34,14 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 <ul>
 <li><strong>success:</strong> whether fullscreen mode was successfully started/ended (true or false)</li>
 <li><strong>trial_type:</strong> jsPsych trialtype of the given trial (fullscreen, instructions, html-keyboard-response or serial-reaction-time)</li>
-<li><strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedbacks!)</li>
+<li><strong>trial_index:</strong> the number of the given trials (all events considered, even instructions, feedback!)</li>
 <li><strong>time_elapsed:</strong> the time elapsed from the start of the script in ms</li>
 <li><strong>internal_code_id:</strong> internal node id of the trial</li>
 <li><strong>subject:</strong> a 15-character long random subject ID for the online version, and customized subject number for the offline version</li>
 <li><strong>session:</strong> customized session number (for offline version only)</li>
 <li><strong>browser_event:</strong> browser events at the given trial (fullscreenenter, fullscreenexit, blur or focus)</li>
 <li><strong>view_history:</strong> only relavant at the instructions; the actions and the corresponding RTs during the reading of the instructions</li>
-<li><strong>rt:</strong> reaction time (RT) in ms - in the case of first responses to the trial, it shows the rt calculated from the appearance of the stimulus; in the case of not first responses, it shows the rt calculated from the last button press</li>
+<li><strong>rt:</strong> reaction time (RT) in ms - in the case of first responses to the trial, it shows the rt calculated from the appearence of the stimulus; in the case of not first responses, it shows the rt calculated from the last button press</li>
 <li><strong>stimulus:</strong> stimulus on the screen; relevant only if instructions/feedback are present</li>
 <li><strong>key_press:</strong> number code of the key pressed</li>
 <li><strong>correct:</strong> whether the response was correct (true or false)</li>
@@ -74,7 +74,7 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 <li><strong>initialDelay:</strong> the delay before the first trial of a block</li>
 
 <h2>How to start the task</h2>
-Open the <i>index.html</i> file in either the <i>offline</i> or <i>online</i> folder. When the offline version is started, you can customize the subject and session numbers (any number is accepted). If you start the offline version, a random subject ID will be allocated. In the offline versions, the subject number determines the used sequence (out of the 24 possible sequences). For the same subject number, the same sequence will be used with every session numbers.
+Open the <i>index.html</i> file in either the <i>offline</i> or <i>online</i> folder. When the offline version is started, you can customize the subject and session numbers (any number is accepted). If you start the offline version, a random subject ID will be allocated. In the offline versions, the subject number determines the used sequence (out of the 24 possible sequences). For the same subject number, the same sequence will be used with every session number.
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>

@@ -4,6 +4,12 @@
 
 <img src="static/logo_memo.png" height="100">
 
+<h2>Citation</h2>
+If you use the script, please include this citation in your manuscript:
+
+Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (Version 1.0.0) [Computer software]. https://doi.org/10.5281/zenodo.7124730
+<a href="https://zenodo.org/badge/latestdoi/258316160"><img src="https://zenodo.org/badge/258316160.svg" alt="DOI"></a>
+
 <h2>About the task</h2>
 
 <p>In the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as they can.</p>

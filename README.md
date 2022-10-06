@@ -28,7 +28,7 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 
 <p>The breaks between the blocks are <strong>self-paced</strong>. The user can continue the task when they press a response key.</p>
 
-<p>After the end of the task, output data downloads to the local machine (CSV format). If the user quits before the end of the task, the data also downloads to the local machine.</p>
+<p>After the end of the task, output data will be downloaded to the local machine (CSV format). If the user quits before the end of the task, the data will also be downloaded to the local machine.</p>
 
 <h2>Output variables</h2>
 <ul>
@@ -60,6 +60,8 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 <li><strong>actual_triplet:</strong> the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)</li>
 <li><strong>triplet_type:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T)</li>
 </ul>
+<li><strong>isWarning:</strong> the string "warning" appears if a warning was shown due to low (<80%) overall performance.</li>
+</ul>
 
 <h2>Settings</h2>
 In the <i>parameters.js</i> file, several parameters can be modified by the user:
@@ -78,7 +80,7 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 
 
 <h2>How to start the task</h2>
-Open the <i>index.html</i> file in either the <i>main</i> folder.
+Open the <i>index.html</i> file in the <i>main</i> folder.
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>

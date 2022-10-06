@@ -12,9 +12,9 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 
 <h2>About the task</h2>
 
-<p>In the task, four circles are presented on the screen horizontally. From time to time, a target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as they can.</p>
+<p>In the task, four circles are presented on the screen horizontally. A target stimulus (a dog's head) appears in one of the four circles. The task of the user is to press the response key corresponding to the position of the target stimulus as fast and as accurately as they can.</p>
 
-<p>By default, the task begins with three blocks of practice with random trials (85 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 5 random stimuli at the beginning, and 10 repetitions of a randomly chosen 8-element sequence.</p>
+<p>By default, the task begins with one block of practice with random trials (80 stimuli in each block). After that, 20 blocks of ASRT follows. Each block contains 10 repetitions of a randomly chosen 8-element sequence.</p>
 
 <p>The trials are images of dogs. The <strong>'s', 'f', 'j' and 'l'</strong> keys on the keyboard are set as response keys (corresponding to the four positions from left to right).</p>
 
@@ -61,20 +61,24 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 <li><strong>triplet_type:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T)</li>
 </ul>
 
-<h2>Setup options</h2>
+<h2>Settings</h2>
 In the <i>parameters.js</i> file, several parameters can be modified by the user:
 <li><strong>language:</strong> the language of the task. Available languages: english (en), hungarian (hu), french (fr), portuguese (pt)</li>
 <li><strong>numberOfPracticeBlocks:</strong> the number of practice blocks at the beginning</li>
 <li><strong>numberOfBlocks:</strong> the number of learning blocks (besides the practice blocks)</li>
-<li><strong>numberOfBlockElements:</strong> the number of sequence elements in a block</li>
 <li><strong>numberOfSequenceRepetitons:</strong> the number of repetitons of the four-element sequence</li>
 <li><strong>patternTrialImage:</strong> the image used for the pattern trials</li>
 <li><strong>randomTrialImage:</strong> the image used for the random trials</li>
 <li><strong>rsi:</strong> the response-to-stimulus interval after a button press (in ms)</li>
 <li><strong>initialDelay:</strong> the delay before the first trial of a block</li>
+<li><strong>overallWarning:</strong> a warning can be shown to the participants if their performance drops below 80% throughout the whole task</li>
+<li><strong>isOffline:</strong> if true, a screen will appear before that task where we can indicate the subject and session number. In that case, the sequence selected for the participants will depend on the subject number. Always the same sequence will be selected for a specific subject number (in the different sessions). If false, a randomly generated subject number will be allocated to the participant, and the sequence will be selected randomly. In that case, the session number is always 1.</li>
+<li><strong>responseKeys:</strong> the response keys</li>
+<li><strong>isFirstFiveRandom:</strong> If true, at the beginning of each block, the first five trials will be random (5 random + 80 sequence elements = 85 trials/block). If false, no random trials will be presented at the beginning of the task (80 sequence elements = 80 trials/block)</li>
+
 
 <h2>How to start the task</h2>
-Open the <i>index.html</i> file in either the <i>offline</i> or <i>online</i> folder. When the offline version is started, you can customize the subject and session numbers (any number is accepted). If you start the offline version, a random subject ID will be allocated. In the offline versions, the subject number determines the used sequence (out of the 24 possible sequences). For the same subject number, the same sequence will be used with every session number.
+Open the <i>index.html</i> file in either the <i>main</i> folder.
 
 <h2>Browser requirements</h2>
 <p>Any browser except Safari and Internet Explorer. Recommended: Chrome.</p>

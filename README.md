@@ -73,7 +73,7 @@ In the <i>parameters.js</i> file, several parameters can be modified by the user
 <li><strong>rsi:</strong> the response-to-stimulus interval after a button press (in ms)</li>
 <li><strong>initialDelay:</strong> the delay before the first trial of a block</li>
 <li><strong>overallWarning:</strong> a warning can be shown to the participants if their performance drops below 80% throughout the whole task</li>
-<li><strong>isOffline:</strong> if true, a screen will appear before that task where we can indicate the subject and session number. In that case, the sequence selected for the participants will depend on the subject number. Always the same sequence will be selected for a specific subject number (in the different sessions). If false, a randomly generated subject number will be allocated to the participant, and the sequence will be selected randomly. In that case, the session number is always 1.</li>
+<li><strong>isOffline:</strong> if true, a screen will appear before the task where we can indicate the subject and session number. In that case, the sequence selected for the participants will depend on the subject number. Always the same sequence will be selected for a specific subject number (in the different sessions). If false, a randomly generated subject number will be allocated to the participant, and the sequence will be selected randomly. In that case, the session number is always 1.</li>
 <li><strong>responseKeys:</strong> the response keys</li>
 <li><strong>isFirstFiveRandom:</strong> If true, at the beginning of each block, the first five trials will be random (5 random + 80 sequence elements = 85 trials/block). If false, no random trials will be presented at the beginning of the task (80 sequence elements = 80 trials/block)</li>
 

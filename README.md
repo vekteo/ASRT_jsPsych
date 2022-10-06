@@ -59,7 +59,6 @@ Vékony, T. (2021). Alternating Serial Reaction Time Task created with jsPsych (
 <li><strong>cumulative_RT:</strong> the RT from the beginning of the first appeareance of the trial in ms</li>
 <li><strong>actual_triplet:</strong> the triplet to what response was given (three digits indicating the positions of the target stimulus in the last three trials)</li>
 <li><strong>triplet_type:</strong> the type of the triplet (high-probability triplet: H; low-probability triplet: L, first trials: X, trill: T, repetition: T)</li>
-</ul>
 <li><strong>isWarning:</strong> the string "warning" appears if a warning was shown due to low (<80%) overall performance.</li>
 </ul>
 

@@ -58,6 +58,13 @@ const en = {
         startButton: "Start the task!",
         goBackButton: "Change the parameters"
     },
+    warning: {
+        warning: "WARNING!",
+        accuracy: "Your accuracy throughout the whole task:",
+        onlyValid: "We can only accept your submission if your accuracy is above 80% by the end of the task!",
+        moreAccurate: "Please try to be more accurate!",
+        pressButton: "Please press a button to continue!"
+    }
 }
 
 const hu = {
@@ -120,6 +127,13 @@ const hu = {
         startButton: "Feladat kezdése",
         goBackButton: "Paraméterek változtatása"
     },
+    warning: {
+        warning: "FIGYELEM!",
+        accuracy: "Az eddigi pontosságod a feladat egésze alatt:",
+        onlyValid: "Csak akkor tudjuk elfogadni a kitöltésed, ha a feladat végére 80% felett lesz a pontosságod!",
+        moreAccurate: "Kérlek, próbálj pontosabb lenni!",
+        pressButton: "Kérlek, nyomj meg egy gombot a folytatáshoz!"
+    }
 }
 
 const fr = {
@@ -182,7 +196,13 @@ const fr = {
         startButton: "Commencez la tâche !",
         goBackButton: "Modifier les paramètres"
     },
-    
+    warning: {
+        warning: "ATTENTION!",
+        accuracy: "Votre précision tout au long de la tâche :",
+        onlyValid: "Nous ne pouvons accepter votre soumission que si votre précision est supérieure à 80 % à la fin de la tâche.",
+        moreAccurate: "Essayez d'être plus précis !",
+        pressButton: "Veuillez appuyer sur un bouton pour continuer !"
+    }
 }
 
 const pt = {
@@ -245,6 +265,13 @@ const pt = {
         startButton: "Comece a tarefa!",
         goBackButton: "Alterar os parâmetros"
     },
+    warning: {
+        warning: "ATENÇÃO!",
+        accuracy: "A sua precisão ao longo de toda a tarefa:",
+        onlyValid: "Só podemos aceitar a sua submissão se tiver mais de 80% de exactidão no final do trabalho.",
+        moreAccurate: "Tente ser mais preciso!",
+        pressButton: "Por favor, prima um botão para continuar!"
+    }
 }
 
 const es = {
@@ -307,4 +334,11 @@ const es = {
         startButton: "¡Inicia la tarea!",
         goBackButton: "Cambiar los parámetros"
     },
+    warning: {
+        warning: "¡ATENCIÓN!",
+        accuracy: "Su precisión a lo largo de toda la tarea:",
+        onlyValid: "Sólo podemos aceptar su envío si su precisión es superior al 80% al final de la tarea.",
+        moreAccurate: "Por favor, intente ser más preciso.",
+        pressButton: "Por favor, pulse un botón para continuar."
+    }
 }

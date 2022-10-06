@@ -1,3 +1,5 @@
+/*************** START SCREEN FOR OFFLINE VERSION ***************/
+
 function startScreen(){
     let formDiv = document.createElement("div");
     formDiv.innerHTML = `<form id="form" class="formDiv" onsubmit="return true">
@@ -52,5 +54,6 @@ function goBack() {
 }
 
 function start() {
+    variableCreation(subject.value, session.value)
     expStart(subject.value, session.value)
 }

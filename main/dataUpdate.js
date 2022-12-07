@@ -50,7 +50,7 @@ function dataUpdate() {
 
     //define actual triplet as x, high, low, repetition or trill
 
-    if (lastTrial.is_practice == 1 || lastTrial.trial_number <= 7) {
+    if (lastTrial.is_practice == 1 || lastTrial.trial_number <= firstValidTrial) {
         lastTrial.triplet_type = "X" //trials to exclude
     }
     else if ((variables.usedSequenceString.includes(lastTrial.actual_triplet[0] + lastTrial.actual_triplet[2])) || (variables.usedSequenceString[3] + variables.usedSequenceString[0] === lastTrial.actual_triplet[0] + lastTrial.actual_triplet[2])){
@@ -73,6 +73,5 @@ function dataUpdate() {
     const interactionDataOfLastTrial = interactionData.filter({'trial': lastTrial.trial_index}).values();
     if (interactionDataOfLastTrial) {
         lastTrial.browser_events = JSON.stringify(interactionDataOfLastTrial)
-
      }
  }

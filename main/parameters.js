@@ -1,6 +1,6 @@
 /*************** PARAMETERS OF THE TASK ***************/
 
-const language = hu; //available languages: english (en), hungarian (hu), french (fr), portoguise (pt)
+const language = fr; //available languages: english (en), hungarian (hu), french (fr), portuguese (pt)
 const numberOfPracticeBlocks = 1;
 const numberOfBlocks = 20;
 const numberOfSequenceRepetitions = 10;

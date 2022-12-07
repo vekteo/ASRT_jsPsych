@@ -23,10 +23,18 @@ function expStart() {
             dataUpdate()
         },
         on_close: function () {
-            jsPsych.data.get().localSave("csv", "ASRT_quit_output.csv");
+            if(isOffline == true) {
+                jsPsych.data.get().localSave("csv", "ASRT_subject" + `${subject.value}` + "_session_" + `${session.value}` + "_quit_output.csv");
+            } else {
+                jsPsych.data.get().localSave("csv", "ASRT_quit_output.csv");
+            }            
         },
         on_finish: function () {
-            jsPsych.data.get().localSave("csv", "ASRT_output.csv");
+            if(isOffline == true) {
+                jsPsych.data.get().localSave("csv", "ASRT_subject" + `${subject.value}` + "_session_" + `${session.value}` + "_output.csv");
+            }  else {
+                jsPsych.data.get().localSave("csv", "ASRT_output.csv");
+            }         
         }
     })
 }

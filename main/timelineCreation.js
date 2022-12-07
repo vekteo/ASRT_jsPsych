@@ -86,13 +86,13 @@ function timelineCreation() {
         //show feedback after the end of the block
 
         timeline.push(feedback);
-        if (overallWarning == true) {
-            timeline.push(warning)
-        }       
 
         //do not show blockStart event after the last block
 
         if (blockNum !== numberOfBlocks){
+            if (overallWarning !== true) {
+                timeline.push(warning)
+            }
             timeline.push(blockStart);
         }
     }

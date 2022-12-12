@@ -90,7 +90,7 @@ function timelineCreation() {
         //do not show blockStart event after the last block
 
         if (blockNum !== numberOfBlocks){
-            if (overallWarning !== true) {
+            if (overallWarning == true) {
                 timeline.push(warning)
             }
             timeline.push(blockStart);
